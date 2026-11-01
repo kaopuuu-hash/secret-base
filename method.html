@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="仮想街いわたオープンデータ分析サイトで使っている数字の見方（Dashboardの集計方法）を整理したページ。">
+<title>分析手法 | 仮想街いわたオープンデータ分析</title>
+<style>
+:root{--fg:#222;--bg:#fff;--muted:#666;--line:#e5e5e5;--accent:#14365e;--navy:#14365e;--navy-pale:#eef2f7;--max:720px}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:system-ui,-apple-system,"Hiragino Kaku Gothic ProN","Noto Sans JP",sans-serif;line-height:1.8;font-size:16px}
+header{border-bottom:1px solid var(--line)}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 16px}
+.nav{display:flex;justify-content:space-between;align-items:center;padding:12px 0;flex-wrap:wrap;gap:8px}
+.nav a{color:var(--fg);text-decoration:none}
+.nav ul{display:flex;gap:12px;list-style:none;margin:0;padding:0;flex-wrap:wrap}
+main{padding:24px 0 48px}
+h1{font-size:1.5rem;line-height:1.4;margin:16px 0}
+h2{font-size:1.2rem;margin-top:32px;border-left:4px solid var(--accent);padding-left:10px}
+.card{border:1px solid var(--line);padding:16px;margin:16px 0}
+table{border-collapse:collapse;width:100%;margin:12px 0;font-size:0.95rem}
+th,td{border:1px solid var(--line);padding:8px;text-align:right}
+th:first-child,td:first-child{text-align:left}
+.note{color:var(--muted);font-size:0.9rem}
+footer{border-top:1px solid var(--line);color:var(--muted);font-size:0.9rem;padding:16px 0 32px}
+th{background:var(--navy-pale)}
+.gnav{background:var(--navy);color:#fff}
+.gnav .wrap{display:flex;flex-wrap:wrap;gap:2px}
+.gnav a{color:#fff;text-decoration:none;font-size:.85rem;padding:9px 10px}
+.gnav a:hover{background:rgba(255,255,255,.14)}
+.gnav a[aria-current="page"]{background:rgba(255,255,255,.2);font-weight:700}
+.more{font-size:.9rem;margin-top:16px}
+.more a{color:var(--accent);font-weight:600}
+@media(max-width:560px){.wrap{padding:0 12px}table{font-size:0.85rem}th,td{padding:6px}}
+</style>
+</head>
+<body>
+<nav class="gnav" aria-label="サイト共通メニュー">
+<div class="wrap">
+<a href="index.html">トップ</a>
+<a href="dashboard.html">Dashboard（いわた）</a>
+<a href="fukuroi.html">袋井Dashboard</a>
+<a href="mori.html">森町Dashboard</a>
+<a href="method.html" aria-current="page">分析手法</a>
+<a href="sources.html">出典・参考資料</a>
+<a href="seisaku.html">制作手法</a>
+<a href="links.html">リンク集</a>
+</div>
+</nav>
+<header>
+<div class="wrap nav">
+<a href="index.html"><strong>仮想街いわたオープンデータ分析</strong></a>
+</div>
+</header>
+
+<main id="top" class="wrap">
+<h1>分析手法：数字の読み方</h1>
+<p>このサイトで使っている数字の見方を、既存ページの記載に基づいて整理したページです。ここに書かれていない手法は使っていません。</p>
+<p class="note">このページは method.html 1つだけ。外部通信・画像・広告・解析なし。JSなしでも読めます。</p>
+
+<section id="dashboard-method" aria-labelledby="dashboard-method-h">
+<h2 id="dashboard-method-h">1. Dashboardの集計方法</h2>
+<p>Dashboard（いわた）の数値は、ページ内に埋め込まれたデータ（仮想街いわたのオープンデータ）からその場で集計しています。総人口・総世帯数は町別データ299件の合計、年齢別人口は5歳階級・男女別（21区分）、高齢化率は65歳以上の人口を総人口で割った割合、町別人口グラフは人口の多い上位15町、避難所数は指定避難所データ43件の件数です。</p>
+<p class="more">▶ 根拠：<a href="dashboard.html">Dashboard（いわた）</a>（埋め込みデータと集計処理）</p>
+</section>
+
+<p class="more">▶ 関連ページ：<a href="sources.html">出典・参考資料</a>
+<a href="seisaku.html">制作手法</a></p>
+</main>
+
+<footer>
+<div class="wrap">
+<p>© 2026 超軽量サイト | 本ページは既存ページの記載に基づいて作成 | 単一HTML構成</p>
+</div>
+</footer>
+</body>
+</html>
