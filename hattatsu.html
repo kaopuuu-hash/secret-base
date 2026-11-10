@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>発達特性＆不登校支援 — 基礎調査</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#0d0b09;--ink:#faf5ec;--mut:#b8a88f;--acc:#e09a3c;--acc2:#c65b2e;--line:rgba(250,245,236,.14)}
+body{font-family:system-ui,-apple-system,'Segoe UI',Roboto,'Hiragino Kaku Gothic ProN','Hiragino Sans','Noto Sans JP','Yu Gothic UI','Yu Gothic',Meiryo,sans-serif;background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased;line-height:1.6;overflow-x:hidden}
+a{color:inherit}
+.geo-bg{position:fixed;inset:0;pointer-events:none;opacity:.5;background-image:radial-gradient(circle at 12% 18%,rgba(224,154,60,.16) 0 90px,transparent 91px),radial-gradient(circle at 85% 12%,rgba(198,91,46,.14) 0 130px,transparent 131px),repeating-linear-gradient(0deg,transparent 0 47px,rgba(250,245,236,.05) 47px 48px),repeating-linear-gradient(90deg,transparent 0 47px,rgba(250,245,236,.05) 47px 48px)}
+.tri{position:fixed;right:-40px;bottom:10%;width:0;height:0;border-left:90px solid transparent;border-right:90px solid transparent;border-bottom:150px solid rgba(224,154,60,.12);pointer-events:none;transform:rotate(12deg)}
+.wrap{max-width:1080px;margin:0 auto;padding:0 24px 90px;position:relative}
+nav{position:sticky;top:0;z-index:10;background:rgba(13,11,9,.88);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.nav-in{max-width:1080px;margin:0 auto;padding:12px 24px;display:flex;gap:12px;align-items:center;font-size:13px}
+.nav-in a{text-decoration:none}
+.dot{width:10px;height:10px;border-radius:50%;background:var(--acc);display:inline-block}
+.sq{width:10px;height:10px;background:var(--acc2);display:inline-block}
+.hero{padding:70px 0 6px;max-width:780px}
+.kicker{display:flex;gap:10px;align-items:center;font-size:12px;letter-spacing:.18em;color:var(--acc);margin-bottom:16px}
+.kicker::after{content:"";height:1px;width:120px;background:var(--acc)}
+h1{font-size:clamp(26px,8.5vw,54px);font-weight:800;letter-spacing:-.02em;line-height:1.25;margin-bottom:14px;text-wrap:balance;word-break:keep-all;overflow-wrap:normal}
+h1 .o{color:transparent;-webkit-text-stroke:1.5px var(--acc);paint-order:stroke fill}
+.sub{color:var(--mut);font-size:16px;max-width:680px}
+.shapes{display:flex;gap:10px;margin-top:22px;align-items:center}
+.c1{width:44px;height:44px;border-radius:50%;background:var(--acc)}
+.c2{width:44px;height:44px;border-radius:50%;border:2px solid var(--acc)}
+.t1{width:0;height:0;border-left:22px solid transparent;border-right:22px solid transparent;border-bottom:38px solid var(--acc2)}
+.bar{height:8px;width:min(280px,40vw);flex:none;background:repeating-linear-gradient(90deg,var(--acc) 0 18px,transparent 18px 28px);border-radius:4px}
+.sec{margin-top:46px}
+.sec-h{display:flex;gap:12px;align-items:center;margin-bottom:14px}
+.num{width:30px;height:30px;border-radius:50%;background:var(--acc);color:#14100a;font-weight:800;display:grid;place-content:center;font-size:14px;flex:none}
+.sec-h h2{font-size:15px;letter-spacing:.1em}
+.sec-h::after{content:"";height:1px;flex:1;background:var(--line)}
+.sec p.lead{font-size:14px;color:var(--mut);margin-bottom:12px;max-width:760px}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.stat{background:rgba(250,245,236,.03);border:1px solid var(--line);border-radius:4px 20px 4px 20px;padding:16px 18px;position:relative;overflow:hidden}
+.stat::before{content:"";position:absolute;left:0;top:0;bottom:0;width:6px;background:linear-gradient(var(--acc),var(--acc2))}
+.stat b{font-size:30px;display:block;line-height:1.2}
+.stat b small{font-size:15px;font-weight:700}
+.stat span{font-size:12.5px;color:var(--mut);display:block;margin-top:4px}
+.chart{background:rgba(250,245,236,.03);border:1px solid var(--line);border-radius:4px 20px 4px 20px;padding:18px 20px;margin-bottom:12px}
+.chart h3{font-size:15px;margin-bottom:4px}
+.chart .cap{font-size:12.5px;color:var(--mut);margin-top:8px}
+svg{width:100%;height:auto;display:block;margin-top:10px}
+svg text{font-family:inherit}
+.tblwrap{overflow-x:auto;margin-bottom:14px}
+table.tbl{width:100%;border-collapse:collapse;font-size:13px;min-width:560px}
+.tbl th,.tbl td{border:1px solid var(--line);padding:7px 9px;text-align:left;vertical-align:top}
+.tbl th{background:rgba(224,154,60,.14);white-space:nowrap}
+.tbl caption{text-align:left;font-size:14px;font-weight:700;padding:4px 0 8px}
+.unknown{border:1px solid var(--acc2);background:rgba(198,91,46,.08);border-radius:4px 20px 4px 20px;padding:18px 20px}
+.unknown ul{margin:6px 0 0;padding-left:1.3em;font-size:14px}
+.unknown li{margin:5px 0}
+.src{font-size:12.5px;color:var(--mut)}
+.src li{margin:6px 0;list-style:none}
+.src a{text-decoration:underline;word-break:break-all}
+.foot{margin-top:54px;padding-top:16px;border-top:1px solid var(--line);font-size:12px;color:var(--mut);display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.foot a{text-decoration:underline}
+@media(max-width:760px){h1{font-size:34px}.stats{grid-template-columns:1fr 1fr}.tri{display:none}.geo-bg{opacity:.3}.bar{width:110px}.wrap{padding:0 18px 70px}}
+</style>
+</head>
+<body>
+<div class="geo-bg"></div><div class="tri"></div>
+<nav><div class="nav-in"><span class="dot"></span><b>地域データ置き場</b><span class="sq"></span><span style="margin-left:auto;font-size:11px;color:var(--mut)">●▲■ geometry edition</span></div></nav>
+<div class="wrap">
+<div class="hero">
+<div class="kicker">● テーマ24 — 独立調査</div>
+<h1>発達特性＆<wbr><span class="o">不登校支援</span></h1>
+<p class="sub">磐田市・発達特性＆不登校支援の基礎調査。市内の学校、教育支援センター、発達支援の事業所、行政制度（市・県・国）を公的資料で調べた記録です。調査日：2026-11-10。分からないものは「未取得」と正直に書いてあります。</p>
+<div class="shapes"><div class="c1"></div><div class="c2"></div><div class="t1"></div><div class="bar"></div></div>
+</div>
+
+<div class="sec"><div class="sec-h"><div class="num">1</div><h2>数字で見る全体像</h2></div>
+<div class="stats">
+<div class="stat"><b>20<small> 校</small></b><span>小学校（運用中）※掲載は23校、うち3校は令和8年3月31日閉校</span></div>
+<div class="stat"><b>12<small> 校</small></b><span>中学校（市立10・県立1・私立1）</span></div>
+<div class="stat"><b>5<small> 校</small></b><span>高校（県立4・私立1）</span></div>
+<div class="stat"><b>7,947<small> 人</small></b><span>小学校の児童数（20校・令和8年5月1日現在）</span></div>
+<div class="stat"><b>4,192<small> 人</small></b><span>中学校の生徒数（市立10校・令和8年5月1日現在）</span></div>
+<div class="stat"><b>3<small> 施設</small></b><span>教育支援センター（あすなろ／あすなろ2／第3センター）</span></div>
+<div class="stat"><b>29<small> 件</small></b><span>発達支援の事業所（中核機関1・相談支援10・通所18）</span></div>
+<div class="stat"><b>21<small> 件</small></b><span>行政制度（磐田市5・静岡県9・国7）</span></div>
+</div>
+</div>
+
+<div class="sec"><div class="sec-h"><div class="num">2</div><h2>グラフで見る</h2></div>
+<div class="chart"><h3>① 不登校児童生徒数（全国）の推移 — 文部科学省調査</h3>
+<svg viewBox="0 0 720 350" role="img" aria-label="不登校児童生徒数（全国）の推移グラフ"><line x1="70" y1="234.0" x2="700" y2="234.0" stroke="rgba(250,245,236,.14)" stroke-width="1"/><text x="62" y="238.0" text-anchor="end" font-size="11" fill="#b8a88f">100,000</text><line x1="70" y1="168.0" x2="700" y2="168.0" stroke="rgba(250,245,236,.14)" stroke-width="1"/><text x="62" y="172.0" text-anchor="end" font-size="11" fill="#b8a88f">200,000</text><line x1="70" y1="102.0" x2="700" y2="102.0" stroke="rgba(250,245,236,.14)" stroke-width="1"/><text x="62" y="106.0" text-anchor="end" font-size="11" fill="#b8a88f">300,000</text><line x1="70" y1="36.0" x2="700" y2="36.0" stroke="rgba(250,245,236,.14)" stroke-width="1"/><text x="62" y="40.0" text-anchor="end" font-size="11" fill="#b8a88f">400,000</text><line x1="70" y1="300" x2="700" y2="300" stroke="rgba(250,245,236,.35)" stroke-width="1"/><rect x="150" y="102.6" width="110" height="197.4" fill="#e09a3c"/><text x="205.0" y="92.6" text-anchor="middle" font-size="19" font-weight="700" fill="#faf5ec">299,048人</text><text x="205.0" y="324" text-anchor="middle" font-size="15" fill="#faf5ec">令和4年度</text><text x="205.0" y="344" text-anchor="middle" font-size="12" fill="#b8a88f">在籍者割合 3.2%</text><rect x="330" y="71.3" width="110" height="228.7" fill="#e09a3c"/><text x="385.0" y="61.3" text-anchor="middle" font-size="19" font-weight="700" fill="#faf5ec">346,482人</text><text x="385.0" y="324" text-anchor="middle" font-size="15" fill="#faf5ec">令和5年度</text><text x="385.0" y="344" text-anchor="middle" font-size="12" fill="#b8a88f">在籍者割合 3.7%</text><rect x="510" y="66.4" width="110" height="233.6" fill="#e09a3c"/><text x="565.0" y="56.4" text-anchor="middle" font-size="19" font-weight="700" fill="#faf5ec">353,970人</text><text x="565.0" y="324" text-anchor="middle" font-size="15" fill="#faf5ec">令和6年度</text><text x="565.0" y="344" text-anchor="middle" font-size="12" fill="#b8a88f">在籍者割合は未取得</text></svg>
+<p class="cap">令和6年度の内訳は小学生137,704人・中学生216,266人。磐田市・静岡県の不登校数値は、公表資料の掲載ページを特定できず未取得です。</p></div>
+<div class="chart"><h3>② 小学校 児童数トップ5（令和8年5月1日現在）</h3>
+<svg viewBox="0 0 720 246" role="img" aria-label="小学校 児童数トップ5グラフ"><text x="0" y="27" font-size="15" fill="#faf5ec">磐田北小</text><rect x="118" y="4" width="480.0" height="34" fill="#e09a3c"/><text x="608.0" y="27" font-size="15" font-weight="700" fill="#faf5ec">801人</text><text x="0" y="75" font-size="15" fill="#faf5ec">東部小</text><rect x="118" y="52" width="435.7" height="34" fill="#e09a3c"/><text x="563.7" y="75" font-size="15" font-weight="700" fill="#faf5ec">727人</text><text x="0" y="123" font-size="15" fill="#faf5ec">富士見小</text><rect x="118" y="100" width="335.0" height="34" fill="#e09a3c"/><text x="463.0" y="123" font-size="15" font-weight="700" fill="#faf5ec">559人</text><text x="0" y="171" font-size="15" fill="#faf5ec">磐田南小</text><rect x="118" y="148" width="333.8" height="34" fill="#e09a3c"/><text x="461.8" y="171" font-size="15" font-weight="700" fill="#faf5ec">557人</text><text x="0" y="219" font-size="15" fill="#faf5ec">磐田中部小</text><rect x="118" y="196" width="329.0" height="34" fill="#e09a3c"/><text x="457.0" y="219" font-size="15" font-weight="700" fill="#faf5ec">549人</text></svg>
+<p class="cap">市立小学校20校のうち児童数の多い5校。全20校の合計は7,947人。</p></div>
+<div class="chart"><h3>③ 学年別人数（市立小・中学校、令和8年5月1日現在）</h3>
+<svg viewBox="0 0 720 330" role="img" aria-label="学年別人数グラフ"><line x1="46" y1="199.1" x2="706" y2="199.1" stroke="rgba(250,245,236,.14)" stroke-width="1"/><text x="38" y="203.1" text-anchor="end" font-size="11" fill="#b8a88f">500</text><line x1="46" y1="122.2" x2="706" y2="122.2" stroke="rgba(250,245,236,.14)" stroke-width="1"/><text x="38" y="126.2" text-anchor="end" font-size="11" fill="#b8a88f">1,000</text><line x1="46" y1="45.4" x2="706" y2="45.4" stroke="rgba(250,245,236,.14)" stroke-width="1"/><text x="38" y="49.4" text-anchor="end" font-size="11" fill="#b8a88f">1,500</text><line x1="46" y1="276" x2="706" y2="276" stroke="rgba(250,245,236,.35)" stroke-width="1"/><rect x="62" y="99.0" width="50" height="177.0" fill="#e09a3c"/><text x="87.0" y="91.0" text-anchor="middle" font-size="13" font-weight="700" fill="#faf5ec">1,151</text><text x="87.0" y="300" text-anchor="middle" font-size="14" fill="#faf5ec">小1</text><rect x="134" y="87.0" width="50" height="189.0" fill="#e09a3c"/><text x="159.0" y="79.0" text-anchor="middle" font-size="13" font-weight="700" fill="#faf5ec">1,229</text><text x="159.0" y="300" text-anchor="middle" font-size="14" fill="#faf5ec">小2</text><rect x="206" y="80.7" width="50" height="195.3" fill="#e09a3c"/><text x="231.0" y="72.7" text-anchor="middle" font-size="13" font-weight="700" fill="#faf5ec">1,270</text><text x="231.0" y="300" text-anchor="middle" font-size="14" fill="#faf5ec">小3</text><rect x="278" y="51.8" width="50" height="224.2" fill="#e09a3c"/><text x="303.0" y="43.8" text-anchor="middle" font-size="13" font-weight="700" fill="#faf5ec">1,458</text><text x="303.0" y="300" text-anchor="middle" font-size="14" fill="#faf5ec">小4</text><rect x="350" y="57.5" width="50" height="218.5" fill="#e09a3c"/><text x="375.0" y="49.5" text-anchor="middle" font-size="13" font-weight="700" fill="#faf5ec">1,421</text><text x="375.0" y="300" text-anchor="middle" font-size="14" fill="#faf5ec">小5</text><rect x="422" y="58.0" width="50" height="218.0" fill="#e09a3c"/><text x="447.0" y="50.0" text-anchor="middle" font-size="13" font-weight="700" fill="#faf5ec">1,418</text><text x="447.0" y="300" text-anchor="middle" font-size="14" fill="#faf5ec">小6</text><rect x="494" y="67.8" width="50" height="208.2" fill="#c65b2e"/><text x="519.0" y="59.8" text-anchor="middle" font-size="13" font-weight="700" fill="#faf5ec">1,354</text><text x="519.0" y="300" text-anchor="middle" font-size="14" fill="#faf5ec">中1</text><rect x="566" y="56.6" width="50" height="219.4" fill="#c65b2e"/><text x="591.0" y="48.6" text-anchor="middle" font-size="13" font-weight="700" fill="#faf5ec">1,427</text><text x="591.0" y="300" text-anchor="middle" font-size="14" fill="#faf5ec">中2</text><rect x="638" y="59.1" width="50" height="216.9" fill="#c65b2e"/><text x="663.0" y="51.1" text-anchor="middle" font-size="13" font-weight="700" fill="#faf5ec">1,411</text><text x="663.0" y="300" text-anchor="middle" font-size="14" fill="#faf5ec">中3</text><text x="62" y="324" font-size="12" fill="#b8a88f">■ 小学校（オレンジ）　■ 中学校（濃いオレンジ）</text></svg>
+<p class="cap">小学校20校・中学校10校の学年ごとの合計。小学校計7,947人、中学校計4,192人。</p></div>
+</div>
+
+<div class="sec"><div class="sec-h"><div class="num">3</div><h2>学校一覧</h2></div>
+<div class="tblwrap"><table class="tbl"><caption>小学校（23校掲載）</caption><thead><tr><th>校名</th><th>状態</th></tr></thead><tbody><tr><td>磐田北</td><td>運用中</td></tr><tr><td>磐田中部</td><td>運用中</td></tr><tr><td>磐田西</td><td>運用中</td></tr><tr><td>磐田南</td><td>運用中</td></tr><tr><td>東部</td><td>運用中</td></tr><tr><td>向陽</td><td>運用中（令和8年4月1日開校・向陽学府一体校）</td></tr><tr><td>大藤</td><td>令和8年3月31日閉校</td></tr><tr><td>向笠</td><td>令和8年3月31日閉校</td></tr><tr><td>長野</td><td>運用中</td></tr><tr><td>岩田</td><td>令和8年3月31日閉校</td></tr><tr><td>田原</td><td>運用中</td></tr><tr><td>富士見</td><td>運用中</td></tr><tr><td>福田</td><td>運用中</td></tr><tr><td>豊浜</td><td>運用中</td></tr><tr><td>竜洋東</td><td>運用中</td></tr><tr><td>竜洋西</td><td>運用中</td></tr><tr><td>竜洋北</td><td>運用中</td></tr><tr><td>豊田南</td><td>運用中</td></tr><tr><td>豊田北部</td><td>運用中</td></tr><tr><td>青城</td><td>運用中</td></tr><tr><td>豊田東</td><td>運用中</td></tr><tr><td>豊岡南</td><td>運用中</td></tr><tr><td>豊岡北</td><td>運用中</td></tr></tbody></table></div>
+<div class="tblwrap"><table class="tbl"><caption>中学校・高校（17校）</caption><thead><tr><th>校名</th><th>種別</th><th>設置者</th><th>所在地</th></tr></thead><tbody><tr><td>静岡県立ふじのくに中学校 磐田本校</td><td>中学校</td><td>県立</td><td>〒438-0078 磐田市中泉1-6-16</td></tr><tr><td>磐田市立磐田第一中学校</td><td>中学校</td><td>市立</td><td>磐田市国府台39-1（〒438-0077）</td></tr><tr><td>磐田市立向陽中学校</td><td>中学校</td><td>市立</td><td>〒438-0013 磐田市向笠竹之内1162-2</td></tr><tr><td>磐田市立城山中学校</td><td>中学校</td><td>市立</td><td>磐田市見付263-3（〒438-0086）</td></tr><tr><td>磐田市立神明中学校</td><td>中学校</td><td>市立</td><td>磐田市鎌田2262-74（〒438-0038）</td></tr><tr><td>磐田市立南部中学校</td><td>中学校</td><td>市立</td><td>磐田市野箱32番地（〒438-0065）</td></tr><tr><td>磐田市立福田中学校</td><td>中学校</td><td>市立</td><td>磐田市福田中島3753-1（〒437-1204）</td></tr><tr><td>磐田市立竜洋中学校</td><td>中学校</td><td>市立</td><td>〒438-0231 磐田市豊岡4473番地8</td></tr><tr><td>磐田市立豊田中学校</td><td>中学校</td><td>市立</td><td>〒438-0804 磐田市加茂243</td></tr><tr><td>磐田市立豊田南中学校</td><td>中学校</td><td>市立</td><td>磐田市立野200番地（〒438-0821）</td></tr><tr><td>磐田市立豊岡中学校</td><td>中学校</td><td>市立</td><td>〒438-0114 磐田市合代島943番地</td></tr><tr><td>磐田東中学校</td><td>中学校</td><td>私立</td><td>磐田市見付180-5（〒438-0086）</td></tr><tr><td>静岡県立磐田南高等学校</td><td>高校</td><td>県立</td><td>磐田市見付3084（〒438-8686）</td></tr><tr><td>静岡県立磐田北高等学校</td><td>高校</td><td>県立</td><td>〒438-0086 磐田市見付2031-2</td></tr><tr><td>静岡県立磐田西高等学校</td><td>高校</td><td>県立</td><td>〒438-0078 磐田市中泉2680-1</td></tr><tr><td>静岡県立磐田農業高等学校</td><td>高校</td><td>県立</td><td>〒438-8718 磐田市中泉168</td></tr><tr><td>磐田東高等学校</td><td>高校</td><td>私立</td><td>磐田市見付180-5（〒438-0086）</td></tr></tbody></table></div>
+</div>
+
+<div class="sec"><div class="sec-h"><div class="num">4</div><h2>支援の窓口と施設</h2></div>
+<div class="tblwrap"><table class="tbl"><caption>教育支援センター（3施設・運営はいずれも磐田市教育委員会）</caption><thead><tr><th>施設名</th><th>所在地</th><th>対象者</th><th>支援内容</th><th>相談方法・連絡先</th></tr></thead><tbody><tr><td>教育支援センター（あすなろ）</td><td>磐田市弥藤太島500番地1</td><td>磐田市立小・中学校在籍で情緒不安定により不登校またはその傾向にある者（入級は通級が必要かつ可能・非行傾向が顕著でない者）</td><td>集団生活を通した生活自立・適応能力育成。通所＋訪問支援。臨床心理士コンサル下の指導員による直接支援</td><td>入級手続きあり（希望→面談事前相談→体験入級→在籍校校長に入級願）。電話・面談（月〜金 8:30〜17:00）TEL 0538-33-5198</td></tr><tr><td>あすなろ2</td><td>磐田市見付2386番地7</td><td>同上（市公式ページの対象を準用）</td><td>1対1や小集団活動を通した生活自立・適応能力育成</td><td>電話・面談（平日 8:30〜17:00）TEL 090-6770-7782</td></tr><tr><td>第3の教育支援センター</td><td>磐田市堀之内7番地1</td><td>同上（固有記載は未取得）</td><td>多様な過ごし方を通じた心の回復・適応力育成</td><td>電話・面談（平日 9:00〜15:00）TEL 0538-30-7117</td></tr></tbody></table></div>
+<p class="lead">教育支援センターの費用はいずれも未取得です。</p>
+<div class="tblwrap"><table class="tbl"><caption>発達支援の窓口</caption><thead><tr><th>窓口</th><th>所在地</th><th>内容</th><th>連絡先</th></tr></thead><tbody><tr><td>磐田市発達支援センター「はあと」（中核機関）</td><td>磐田市国府台57-7 総合健康福祉会館（iプラザ）2階</td><td>来所相談・助言・機関連携（対象：発達に心配のある本人・家族）</td><td>TEL 0538-37-2014</td></tr><tr><td>発達相談グループ（こども部 こども未来課）</td><td>〒438-0077 磐田市国府台57-7 iプラザ3階</td><td>障害児通所支援の相談・利用調整</td><td>窓口 9:00〜16:30／電話 8:30〜17:15 TEL 0538-37-2761</td></tr></tbody></table></div>
+<div class="tblwrap"><table class="tbl"><caption>発達支援の事業所（区分別件数）</caption><thead><tr><th>区分</th><th>件数</th></tr></thead><tbody><tr><td>中核機関（発達支援センター「はあと」）</td><td>1件</td></tr><tr><td>障害児相談支援</td><td>10件</td></tr><tr><td>通所支援（児童発達支援・放課後等デイサービス等）</td><td>18件</td></tr><tr><td>合計</td><td>29件</td></tr></tbody></table></div>
+</div>
+
+<div class="sec"><div class="sec-h"><div class="num">5</div><h2>制度の3層（市・県・国）</h2></div>
+<p class="lead">詳細項目（担当部署・申請方法・費用）は公表資料で確認できた範囲だけを書き、確認できなかった欄は「未取得」としています。</p>
+<div class="tblwrap"><table class="tbl"><caption>磐田市（5件）</caption><thead><tr><th>制度名</th><th>概要</th><th>対象者</th><th>担当部署</th><th>申請方法</th><th>費用</th></tr></thead><tbody><tr><td>発達支援センター「はあと」</td><td>教育・発達に関する相談窓口</td><td>未取得</td><td>未取得</td><td>未取得</td><td>未取得</td></tr><tr><td>こどもの発達サポートガイド「ぽっかぽか」</td><td>発達に心配のあるお子さんと保護者のためのデジタルガイド（相談窓口・子育て支援・福祉サービスをまとめたもの）</td><td>発達に心配のあるお子さんと保護者</td><td>未取得</td><td>未取得</td><td>未取得</td></tr><tr><td>障がい児に関する通所サービス・助成</td><td>ページは存在するが詳細未取得</td><td>児童発達支援：発達に課題のある未就学児／放課後等デイ：小1〜高3（特例20歳まで）／訪問支援系：発達に課題のある子ども</td><td>こども部こども未来課発達相談グループ（〒438-0077 磐田市国府台57-7 iプラザ3階／TEL 0538-37-2761）</td><td>未取得</td><td>未取得</td></tr><tr><td>子育てに関する悩み・相談（総合）</td><td>子どもの安全・虐待対応、児童虐待、子ども相談、教育・発達に関する相談、教育に関する相談等を含む</td><td>保護者・市民</td><td>未取得</td><td>未取得</td><td>未取得</td></tr><tr><td>悩み・相談（くらし・手続き）</td><td>市公式サイトの悩み・相談セクション</td><td>未取得</td><td>未取得</td><td>未取得</td><td>未取得</td></tr></tbody></table></div>
+<div class="tblwrap"><table class="tbl"><caption>静岡県（9件）</caption><thead><tr><th>制度名</th><th>概要</th><th>対象者</th><th>担当部署</th><th>申請方法</th><th>費用</th></tr></thead><tbody><tr><td>障害福祉</td><td>障害者総合支援法・児童福祉法に基づく障害福祉サービスの県側管轄</td><td>障害のある方全般</td><td>静岡県健康福祉部障害福祉課・障害者政策課（連絡先詳細は未取得）</td><td>未取得</td><td>未取得</td></tr><tr><td>児童福祉</td><td>児童福祉法に基づく児童福祉サービス全般</td><td>未取得</td><td>未取得</td><td>未取得</td><td>未取得</td></tr><tr><td>知的障害福祉</td><td>知的障害のある方への福祉サービス</td><td>未取得</td><td>未取得</td><td>未取得</td><td>未取得</td></tr><tr><td>精神保健福祉</td><td>精神障害のある方への福祉・保健サービス</td><td>未取得</td><td>未取得</td><td>未取得</td><td>未取得</td></tr><tr><td>身体障害福祉</td><td>身体障害のある方への福祉サービス</td><td>未取得</td><td>未取得</td><td>未取得</td><td>未取得</td></tr><tr><td>障害者更生相談所</td><td>障害者の福祉に関する相談・判定等</td><td>身体に障害のある方／知的障害のある方</td><td>未取得</td><td>未取得</td><td>未取得</td></tr><tr><td>健康福祉センター（各地区）</td><td>各地区の健康福祉センター・保健所・児童相談所等の拠点</td><td>地域住民</td><td>未取得</td><td>未取得</td><td>未取得</td></tr><tr><td>不登校・教育支援（教育委員会管轄）</td><td>教育支援センター等の設置・運営は県教育委員会管轄</td><td>不登校児童生徒</td><td>静岡県教育委員会（担当課の特定は未取得）</td><td>未取得</td><td>未取得</td></tr><tr><td>こども発達支援センター（県内）</td><td>個別名称・所在地・対象は未取得</td><td>未取得</td><td>未取得</td><td>未取得</td><td>未取得</td></tr></tbody></table></div>
+<div class="tblwrap"><table class="tbl"><caption>国（7件）</caption><thead><tr><th>制度名</th><th>概要</th><th>対象者</th><th>担当部署</th><th>申請方法</th><th>費用</th></tr></thead><tbody><tr><td>文科省 不登校児童生徒への支援（教育支援センター設置）</td><td>不登校児童生徒の教育的支援のため、教育支援センターの設置等を推進</td><td>不登校の児童生徒</td><td>未取得</td><td>未取得</td><td>未取得</td></tr><tr><td>文科省 適応指導教室</td><td>不登校児童生徒が学校復帰・社会的自立に向けて段階的に学習・生活に適応するための教室</td><td>不登校の児童生徒</td><td>未取得</td><td>未取得</td><td>未取得</td></tr><tr><td>厚労省 児童発達支援</td><td>障害児通所支援の一つ。障害のある未就学児等に対し、療育・訓練等を提供</td><td>障害のある未就学児等</td><td>厚労省社会・援護局障害保健福祉部（直轄担当課は未取得）</td><td>未取得</td><td>未取得</td></tr><tr><td>厚労省 放課後等デイサービス</td><td>学校授業終了後や休日に、障害のある児童に生活能力向上のための訓練等を提供</td><td>小1〜高3（特例20歳まで）</td><td>厚労省社会・援護局障害保健福祉部（直轄担当課は未取得）</td><td>未取得</td><td>未取得</td></tr><tr><td>厚労省 医療型児童発達支援</td><td>医療的ケアを要する障害児への発達支援</td><td>医療的ケアを要する障害児</td><td>未取得</td><td>未取得</td><td>未取得</td></tr><tr><td>厚労省 保育所等訪問支援</td><td>保育所等に通う障害児に対し、専門的支援を訪問提供</td><td>発達に課題のある子ども</td><td>厚労省 児童発達支援に同じ</td><td>未取得</td><td>未取得</td></tr><tr><td>障害者総合支援法</td><td>障害者の日常生活・社会生活を総合的に支援する法律</td><td>障害者</td><td>厚労省社会・援護局障害保健福祉部企画課</td><td>未取得</td><td>未取得</td></tr></tbody></table></div>
+<p class="lead">なお、磐田市公式HPのサイト内検索では、不登校児童生徒への具体的な支援制度名・内容は本調査では未取得でした（特別支援教育ページ等は確認しましたが詳細未取得）。</p>
+</div>
+
+<div class="sec"><div class="sec-h"><div class="num">6</div><h2>分からなかったこと</h2></div>
+<div class="unknown"><ul>
+<li>不登校の静岡県・磐田市の数値：公表資料の掲載ページを特定できず未取得（全国値は文部科学省調査で取得済み）</li>
+<li>発達支援関連統計（通所支援の利用者数など）：未取得</li>
+<li>制度の申請方法・費用の大部分、県・国の担当部署の多く：公表資料に記載がなく未取得</li>
+<li>教育支援センターの費用、一部リーフレットの本文：未取得</li>
+<li>児童生徒数は画像PDFを目視で書き起こしたもの（行・列の合計が一致することは確認済み）</li>
+<li>この調査は基礎調査のみです。GIS・空間統計・回帰分析は未実施で、独自の改善提案は追加していません</li>
+</ul></div>
+</div>
+
+<div class="sec"><div class="sec-h"><div class="num">7</div><h2>出典</h2></div>
+<ul class="src">
+<li>磐田市公式HP 施設ガイド 小学校：<a href="https://www.city.iwata.shizuoka.jp/shisetsu_guide/kosodate_shisetsu/shougakkou/index.html">https://www.city.iwata.shizuoka.jp/shisetsu_guide/kosodate_shisetsu/shougakkou/index.html</a></li>
+<li>磐田市 小中学校 児童生徒数（令和8年5月1日現在）PDF：<a href="https://www.city.iwata.shizuoka.jp/_res/projects/default_project/_page_/001/004/407/jidouseitosuu.pdf">https://www.city.iwata.shizuoka.jp/_res/projects/default_project/_page_/001/004/407/jidouseitosuu.pdf</a></li>
+<li>磐田市 発達支援センター（発達相談グループ）窓口情報：<a href="https://www.city.iwata.shizuoka.jp/kosodate_kyouiku/1006502/1006510.html">https://www.city.iwata.shizuoka.jp/kosodate_kyouiku/1006502/1006510.html</a></li>
+<li>磐田市 教育支援センター：<a href="https://www.city.iwata.shizuoka.jp/kyoiku/1014889/1014893/1015010.html">https://www.city.iwata.shizuoka.jp/kyoiku/1014889/1014893/1015010.html</a></li>
+<li>文部科学省「児童生徒の問題行動・不登校等生徒指導上の諸課題に関する調査」令和6年度：<a href="https://www.mext.go.jp/content/20260305-mxt_jidou02-100002753_3.pdf">https://www.mext.go.jp/content/20260305-mxt_jidou02-100002753_3.pdf</a>／令和5年度：<a href="https://www.mext.go.jp/content/20241031-mxt_jidou02-100002753_2_2.pdf">https://www.mext.go.jp/content/20241031-mxt_jidou02-100002753_2_2.pdf</a>／令和4年度：<a href="https://www.mext.go.jp/content/20231004-mxt_jidou01-100002753_2.pdf">https://www.mext.go.jp/content/20231004-mxt_jidou01-100002753_2.pdf</a></li>
+<li>静岡県公式HP 障害福祉：<a href="https://www.pref.shizuoka.jp/kenkofukushi/shogaifukushi/index.html">https://www.pref.shizuoka.jp/kenkofukushi/shogaifukushi/index.html</a></li>
+<li>厚生労働省 障害者総合支援法：<a href="https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/hukushi_kaigo/shougaishahukushi/">https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/hukushi_kaigo/shougaishahukushi/</a></li>
+<li>こどもの発達サポートガイド「ぽっかぽか」：<a href="https://www.city.iwata.shizuoka.jp/kosodate_kyouiku/hattatsu_shien/index.html">https://www.city.iwata.shizuoka.jp/kosodate_kyouiku/hattatsu_shien/index.html</a></li>
+</ul>
+</div>
+
+<div class="foot"><span class="dot"></span>テーマ24 独立調査 ・ 基礎調査（2026-11-10）<span style="margin-left:auto"><a href="data.html">地域データ置き場へ</a> ／ <a href="index.html">管理人の部屋（トップ）へ</a></span></div>
+</div>
+</body>
+</html>
