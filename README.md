@@ -4,7 +4,7 @@
 
 公開サイト: https://kaopuuu-hash.github.io/secret-base/
 
-- index.html / cyber-space.html：管理人ページ（トップ）
+- index.html：管理人ページ（トップ）
 - kessan.html：磐田市 令和7年度決算まとめ
 - analysis.html：財政分析
 - dashboard.html：磐田市オープンデータ ダッシュボード
