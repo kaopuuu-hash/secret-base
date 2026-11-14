@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="磐田市 空き家・地域住宅ストック統合分析システム（Phase 1 プロトタイプ）">
-<title>磐田市 空き家・地域住宅ストック統合分析システム（ダッシュボード）</title>
+<meta name="description" content="仮想街いわた 空き家・地域住宅ストック統合分析システム（Phase 1 プロトタイプ）">
+<title>仮想街いわた 空き家・地域住宅ストック統合分析システム（ダッシュボード）</title>
 <style>
   :root { --blue:#2E75B6; --orange:#ED7D31; --gray:#595959; --bg:#f7f9fc; --line:#d9e2ec; --text:#1f2933; --green:#2e7d32; }
   * { box-sizing:border-box; }
@@ -53,7 +53,7 @@
 <body>
 <header>
   <div class="wrap">
-    <h1>磐田市 空き家・地域住宅ストック統合分析システム</h1>
+    <h1>仮想街いわた 空き家・地域住宅ストック統合分析システム</h1>
     <p>Phase 1 プロトタイプ — 公開データの統合基盤とGISマップ</p>
     <p style="font-size:13px">ダッシュボード版：上のボタンで8画面を切り替えて表示します。</p>
     <span class="badge">Open Data Experimental Lab ／ 開発仕様書に基づく Phase 1</span>
@@ -62,7 +62,7 @@
 <main><nav class="tabs"><button class="tabbtn on" data-t="dash">1 総合</button><button class="tabbtn" data-t="aki">2 住宅・空き家</button><button class="tabbtn" data-t="pop">3 人口・世帯</button><button class="tabbtn" data-t="gis">4 GIS</button><button class="tabbtn" data-t="bld">5 建物</button><button class="tabbtn" data-t="risk">6 リスク</button><button class="tabbtn" data-t="pol">7 政策</button><button class="tabbtn" data-t="meta">8 出典・品質</button></nav><div class="panel on" id="p-dash">
 
 <div class="kpis">
-  <div class="kpi"><div class="label">地区数</div><div class="value">299</div><div class="sub">磐田市全域（令和8年9月）</div></div>
+  <div class="kpi"><div class="label">地区数</div><div class="value">299</div><div class="sub">仮想街いわた全域（令和8年9月）</div></div>
   <div class="kpi"><div class="label">総人口</div><div class="value">162,983人</div><div class="sub">令和8年9月末</div></div>
   <div class="kpi"><div class="label">65歳以上</div><div class="value">30.1%</div><div class="sub">49,104人</div></div>
   <div class="kpi"><div class="label">空き家バンク</div><div class="value">6件</div><div class="sub">掲載物件数</div></div>
@@ -71,14 +71,14 @@
 
 <section>
   <h2>プロジェクト概要</h2>
-  <p>磐田市のオープンデータ、国の統計データ、地理空間データを統合し、空き家問題を地域単位で可視化・分析するWebシステムの <b>Phase 1 プロトタイプ</b>です。空き家専用のオープンデータが不足しているため、複数の公開データを結合して独自の分析基盤を構築する方針です。</p>
+  <p>仮想街いわたのオープンデータ、国の統計データ、地理空間データを統合し、空き家問題を地域単位で可視化・分析するWebシステムの <b>Phase 1 プロトタイプ</b>です。空き家専用のオープンデータが不足しているため、複数の公開データを結合して独自の分析基盤を構築する方針です。</p>
   <p class="note">当初は Phase 1 としてデータ取得・GIS基盤・ダッシュボード骨格を構築し、その後 e-Stat 空き家統計・PLATEAU 建物集計・空き家バンクまで統合が進み、現在は8画面すべてが実装済みです。</p>
 </section>
 
 <section>
   <h2>必須画面（8画面）の状況</h2>
   <div class="screen"><h4>1. 総合ダッシュボード</h4><p class="ok">実装済み — KPIカード（地区数・総人口・高齢化率・空き家バンク件数）とプロジェクト概要を表示。地図は「4 GIS」タブにあります。</p></div>
-  <div class="screen"><h4>2. 住宅・空き家統計分析</h4><p class="ok">実装済み — 空き家バンク6件を構造化。e-Stat 住宅・土地統計調査（令和5年）から磐田市の空き家7,840戸の種類別内訳・腐朽破損状況・建て方別・構造別を表示。</p></div>
+  <div class="screen"><h4>2. 住宅・空き家統計分析</h4><p class="ok">実装済み — 空き家バンク6件を構造化。e-Stat 住宅・土地統計調査（令和5年）から仮想街いわたの空き家7,840戸の種類別内訳・腐朽破損状況・建て方別・構造別を表示。</p></div>
   <div class="screen"><h4>3. 人口・世帯構造分析</h4><p class="ok">実装済み — 299地区の人口・年齢階層別データ（令和8年9月末、162,983人）。高齢化率30.1%。人口上位・高齢化率上位の地区表を表示。</p></div>
   <div class="screen"><h4>4. GIS空間分析</h4><p class="ok">実装済み — Leafletによるインタラクティブマップ（メッシュ・道路・公園・レイヤー切り替え）。</p></div>
   <div class="screen"><h4>5. 建物ストック分析</h4><p class="ok">実装済み — PLATEAU 2023の建物89,329棟を集計（用途別・建築年代別・メッシュ分布）。形状データは非掲載、集計値のみ表示。</p></div>
@@ -89,7 +89,7 @@
 
 </div><div class="panel" id="p-aki"><section>
   <h2>空き家統計（e-Stat 住宅・土地統計調査、令和5年）</h2>
-  <p>磐田市の空き家総数は <b>7,840戸</b>（令和5年）。総住宅数 73,360戸に対する空き家率は <b>10.7%</b>。種類別内訳と腐朽・破損状況を以下に示す。</p>
+  <p>仮想街いわたの空き家総数は <b>7,840戸</b>（令和5年）。総住宅数 73,360戸に対する空き家率は <b>10.7%</b>。種類別内訳と腐朽・破損状況を以下に示す。</p>
   <div class="two">
     <div>
       <h3>種類別内訳</h3>
@@ -134,7 +134,7 @@
   <li>市の方針：管理不全空き家改善率 50% 以上、戸建て空き家 2,000戸未満</li>
   <li>危険空き家除却補助：工事費 1/2・上限 50万円。既存住宅取得補助：50万〜150万円</li>
 </ul>
-<p class="note">出典：総務省 住宅・土地統計調査（e-Stat 表番号 0004021631、令和5年）。磐田市（コード 22211）のデータ。腐朽・破損ありの空き家 1,110戸のうち、一戸建 510戸・長屋建 590戸。賃貸用空き家のうち 4,270戸が長屋建・共同住宅（アパート等）。</p>
+<p class="note">出典：総務省 住宅・土地統計調査（e-Stat 表番号 0004021631、令和5年）。仮想街いわた（コード 22211）のデータ。腐朽・破損ありの空き家 1,110戸のうち、一戸建 510戸・長屋建 590戸。賃貸用空き家のうち 4,270戸が長屋建・共同住宅（アパート等）。</p>
 </section>
 
 <section>
@@ -182,7 +182,7 @@
 
 </div><div class="panel" id="p-pop"><section>
   <h2>人口構造（令和8年9月末）</h2>
-  <p>磐田市299地区の人口合計 162,983人。65歳以上 49,104人（30.1%）。地区別の高齢化率は 0%〜66.7% に分散。</p>
+  <p>仮想街いわた299地区の人口合計 162,983人。65歳以上 49,104人（30.1%）。地区別の高齢化率は 0%〜66.7% に分散。</p>
   <table>
     <tr><th>人口上位の地区</th><th>人口</th><th>高齢化率上位の地区</th><th>高齢化率</th><th>人口</th></tr>
     <tr><td>富士見町</td><td>4,359</td><td>大平北</td><td>66.7%</td><td>39</td></tr>
@@ -191,14 +191,14 @@
     <tr><td>西新町</td><td>2,327</td><td>大平南</td><td>57.1%</td><td>49</td></tr>
     <tr><td>明ケ島</td><td>2,185</td><td>篠原</td><td>55.2%</td><td>67</td></tr>
   </table>
-  <p class="note">出典：磐田市公式「町別人口・年齢別人口」（令和8年9月末）。高齢化率は65歳以上人口/総数で再計算。</p>
+  <p class="note">出典：公開オープンデータ「町別人口・年齢別人口」（令和8年9月末）。高齢化率は65歳以上人口/総数で再計算。</p>
 </section>
 
 </div><div class="panel" id="p-gis"><section>
   <h2>GISマップ — 施設・道路・人口メッシュ</h2>
   <div id="map" style="height:520px;border-radius:8px;border:1px solid var(--line);"></div>
   <p class="caption">図1 Leafletによるインタラクティブマップ。メッシュ（就業人口 choropleth）、道路（149本）、公園（17箇所）、土砂災害警戒区域（785ポリゴン）を表示。レイヤー切り替え可能。</p>
-  <p class="note">メッシュは500m単位の就業人口（sangyou.shp由来、JGD2000 Zone8 → WGS84に投影変換済み）。道路・公園は磐田市都市計画基礎調査GISデータ。</p>
+  <p class="note">メッシュは500m単位の就業人口（sangyou.shp由来、JGD2000 Zone8 → WGS84に投影変換済み）。道路・公園は仮想街いわた都市計画基礎調査GISデータ。</p>
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script>
@@ -236,7 +236,7 @@
 <section>
   <h2>人口分布マップ — 地区別人口（令和2年）</h2>
   <div id="popmap" style="height:480px;border-radius:8px;border:1px solid var(--line);"></div>
-  <p class="caption">図2 地区別人口の choropleth（令和2年 国勢調査ベース、磐田市都市計画基礎調査）。328地区、総人口 166,982人。</p>
+  <p class="caption">図2 地区別人口の choropleth（令和2年 国勢調査ベース、仮想街いわた都市計画基礎調査）。328地区、総人口 166,982人。</p>
   <p class="note">地区境界は都市計画基礎調査の地区ポリゴン（JGD2000 Zone8 → WGS84）。人口は令和2年値。より新しい令和8年9月の町別人口（299町、162,983人）は「人口構造」セクションを参照。</p>
   <script>
     (window.__mapInits = window.__mapInits || []).push(function(){
@@ -258,7 +258,7 @@
 
 </div><div class="panel" id="p-bld"><section>
   <h2>建物ストック分析（PLATEAU 2023）</h2>
-  <p>国土交通省 PLATEAU 3D都市モデル（磐田市、2023年）の建物データ <b>89,329棟</b>を集計しました。建物そのものの形状データは掲載せず、集計値のみを表示します。総数は500mメッシュ別の集計（169区画）とも一致しています。</p>
+  <p>国土交通省 PLATEAU 3D都市モデル（仮想街いわた、2023年）の建物データ <b>89,329棟</b>を集計しました。建物そのものの形状データは掲載せず、集計値のみを表示します。総数は500mメッシュ別の集計（169区画）とも一致しています。</p>
   <div class="two">
     <div>
       <h3>用途別（PLATEAUコードリストによる）</h3>
@@ -305,7 +305,7 @@
     <li>1970〜1990年代の建物が 47,840棟と、判明分の約59%を占めます。築40〜55年の層が厚く、今後の老朽化・空き家化の素地です</li>
     <li>住宅系（住宅＋共同住宅＋併用住宅）が 70,267棟（78.7%）。工場 4,842棟（5.4%）は製造業の市の構成を反映しています</li>
   </ul>
-  <p class="note">出典：国土交通省 PLATEAU 2023（磐田市）。集計値は分析パッケージ v0.2.0 の集計結果を用い、総数の二重照合（メッシュ集計との一致）を確認済み。建物の個別位置・形状は表示しません。</p>
+  <p class="note">出典：国土交通省 PLATEAU 2023（仮想街いわた）。集計値は分析パッケージ v0.2.0 の集計結果を用い、総数の二重照合（メッシュ集計との一致）を確認済み。建物の個別位置・形状は表示しません。</p>
 </section></div><div class="panel" id="p-risk"><section>
   <h2>空き家リスク分析（Phase 5）</h2>
   <p>仕様書の初期指標に基づくリスク評価モデルを実装。利用可能な指標のみでスコアを計算し、欠損はゼロとして扱わない。</p>
@@ -318,7 +318,7 @@
         <tr><td>高齢単身世帯率</td><td>20</td><td class="no">0/299</td><td>未取得</td></tr>
         <tr><td>人口減少率</td><td>15</td><td class="ok">157/299</td><td>地区別人口（R2 vs H22）</td></tr>
         <tr><td>世帯数減少率</td><td>10</td><td class="no">0/299</td><td>未取得</td></tr>
-        <tr><td>空き家率</td><td>20</td><td class="ok">299/299</td><td>磐田市全体 10.7%（参考値）</td></tr>
+        <tr><td>空き家率</td><td>20</td><td class="ok">299/299</td><td>仮想街いわた全体 10.7%（参考値）</td></tr>
         <tr><td>災害リスク</td><td>10</td><td class="no">0/299</td><td>国土数値情報（浸水データ取得済み、未統合）</td></tr>
         <tr><td>交通アクセス</td><td>5</td><td class="no">0/299</td><td>未取得</td></tr>
       </table>
@@ -363,7 +363,7 @@
     <tr><td>43</td><td>海老島</td><td>880</td><td>4DK（平家）</td><td>110.9</td><td>1984</td><td>7.9</td><td>市街化調整区域</td></tr>
     <tr><td>19</td><td>城之崎</td><td>1,899</td><td>3LDK</td><td>68.2</td><td>1972</td><td>27.8</td><td>記載なし</td></tr>
   </table>
-  <p class="note">出典：磐田市公式空き家バンク（2026-08-07更新）＋物件PDF6件を画像読取で構造化。市の空き家7,840戸に対するバンク流通率は約0.08%。坪単価は7.9〜34.9万円に分散。</p>
+  <p class="note">出典：公開オープンデータ 空き家バンク（2026-08-07更新）＋物件PDF6件を画像読取で構造化。市の空き家7,840戸に対するバンク流通率は約0.08%。坪単価は7.9〜34.9万円に分散。</p>
   <p>読み取れた要点：市街化調整区域が2件（東新町・海老島）、汲取りが1件（合代島）、リフォーム済みが2件（東新町・城之崎No.19）、二世帯仕様が1件（城之崎No.28）。登録は不動産事業者のみ。</p>
   <h3>市の方針・補助（ページ内データより）</h3>
   <ul>
@@ -379,12 +379,12 @@
     <tr><th>データ</th><th>出典</th><th>状態</th></tr>
     <tr><td>市計画基礎調査（人口・土地利用・災害等）</td><td>静岡県オープンデータ → geospatial.jp CKAN</td><td class="ok">取得済み</td></tr>
     <tr><td>都市計画基礎調査 GIS（メッシュ・道路・公園等）</td><td>同上</td><td class="ok">取得済み</td></tr>
-    <tr><td>磐田市 町別人口・年齢別人口</td><td>磐田市公式（令和8年9月末）</td><td class="ok">取得済み（299地区）</td></tr>
-    <tr><td>磐田市 空き家バンク</td><td>磐田市公式（2026-08-07更新）</td><td class="ok">取得済み（6件）</td></tr>
+    <tr><td>公開オープンデータ 町別人口・年齢別人口</td><td>公開オープンデータ（令和8年9月末）</td><td class="ok">取得済み（299地区）</td></tr>
+    <tr><td>公開オープンデータ 空き家バンク</td><td>公開オープンデータ（2026-08-07更新）</td><td class="ok">取得済み（6件）</td></tr>
     <tr><td>空き家統計（e-Stat 住宅・土地統計調査）</td><td>総務省 住宅・土地統計調査</td><td class="ok">取得済み</td></tr>
-    <tr><td>磐田市 公共施設一覧</td><td>静岡県オープンデータ</td><td class="ok">取得済み（別プロジェクトで利用）</td></tr>
-    <tr><td>交流センター</td><td>磐田市公式</td><td class="ok">取得済み（22箇所）</td></tr>
-    <tr><td>建物形状・用途・建築年</td><td>PLATEAU 3D都市モデル（磐田市、2023年）</td><td class="ok">取得済み（集計値のみ掲載。形状データは非掲載）</td></tr>
+    <tr><td>公開オープンデータ 公共施設一覧</td><td>静岡県オープンデータ</td><td class="ok">取得済み（別プロジェクトで利用）</td></tr>
+    <tr><td>交流センター</td><td>公開オープンデータ</td><td class="ok">取得済み（22箇所）</td></tr>
+    <tr><td>建物形状・用途・建築年</td><td>PLATEAU 3D都市モデル（仮想街いわた、2023年）</td><td class="ok">取得済み（集計値のみ掲載。形状データは非掲載）</td></tr>
     <tr><td>国土数値情報（浸水・土砂）</td><td>国土数値情報 (nlftp.mlit.go.jp)</td><td class="ok">取得済み（洪水浸水 A31-20 + 土砂災害警戒 A33-20）</td></tr>
     <tr><td>不動産取引価格・地価公示</td><td>国土交通省 (reinfolib.mlit.go.jp)</td><td class="hold">地価公示は取得済み（2025年・30地点、集計は分析パッケージに収録）。取引価格は要取得</td></tr>
     <tr><td>空き家バンク（全国版）</td><td>LIFULL・アットホーム等</td><td class="hold">要取得</td></tr>
@@ -426,7 +426,7 @@
     <li>統計的根拠のない推測を事実として表示しない。</li>
     <li>地域単位の分析を基本とする。</li>
     <li>個人情報・所有者情報は取得・公開しない。</li>
-    <li>他自治体への横展開が可能な設計にする（磐田市固有の値は設定ファイルに分離）。</li>
+    <li>他自治体への横展開が可能な設計にする（仮想街いわた固有の値は設定ファイルに分離）。</li>
     <li>存在しないデータを生成しない。未取得は「未取得」と明示する。</li>
   </ul>
 </section>
@@ -452,6 +452,6 @@
   });
 </script>
 </main>
-<footer>Open Data Experimental Lab ／ 磐田市 空き家・地域住宅ストック統合分析システム ／ Phase 1 ／ <a href="../index.html" style="color:var(--gray)">← トップへ戻る</a></footer>
+<footer>Open Data Experimental Lab ／ 仮想街いわた 空き家・地域住宅ストック統合分析システム ／ Phase 1 ／ <a href="../index.html" style="color:var(--gray)">← トップへ戻る</a></footer>
 </body>
 </html>
