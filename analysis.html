@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="仮想街いわたの財政分析。市立病院の赤字と、借金・貯金・財政指標を令和7年度決算の数値で整理した詳細ページ。">
-<title>仮想街いわた 財政分析 | 令和7年度決算</title>
+<meta name="description" content="仮想街いわたの令和7年度の財政分析。健全化判断比率、収支の弾力性、債務と基金、公営企業の構造を数値で整理。">
+<title>仮想街いわた 財政分析 | 令和7年度</title>
 <style>
 :root{--fg:#222;--bg:#fff;--muted:#666;--line:#e5e5e5;--accent:#14365e;--navy:#14365e;--navy-pale:#eef2f7;--max:720px}
 *{box-sizing:border-box}
@@ -31,6 +31,10 @@ th{background:var(--navy-pale)}
 .gnav a[aria-current="page"]{background:rgba(255,255,255,.2);font-weight:700}
 .more{font-size:.9rem;margin-top:16px}
 .more a{color:var(--accent);font-weight:600}
+tr.total td{font-weight:700;background:var(--navy-pale)}
+ul{padding-left:1.4em}
+li{margin:5px 0}
+.warn{background:#fdf6e8;border:1px solid #d9b877;padding:12px 14px;margin:16px 0;font-size:0.95rem}
 @media(max-width:560px){.wrap{padding:0 12px}table{font-size:0.85rem}th,td{padding:6px}}
 </style>
 </head>
@@ -51,50 +55,134 @@ th{background:var(--navy-pale)}
 </nav>
 <header>
 <div class="wrap nav">
-<a href="index.html"><strong>仮想街いわたオープンデータ分析</strong></a>
+<a href="#top"><strong>仮想街いわた 財政分析 令和7年度</strong></a>
+<nav aria-label="メニュー">
+<ul>
+<li><a href="#summary">結論</a></li>
+<li><a href="#soundness">健全化</a></li>
+<li><a href="#elasticity">弾力性</a></li>
+<li><a href="#debt">債務・基金</a></li>
+<li><a href="#enterprise">公営企業</a></li>
+<li><a href="#evaluation">評価</a></li>
+<li><a href="#status">確認状況</a></li>
+</ul>
+</nav>
 </div>
 </header>
 
 <main id="top" class="wrap">
-<h1>財政分析：課題と指標を詳しく見る</h1>
-<p>このページは <a href="kessan.html">決算概要ページ</a> の分析詳細版です。「課題：市立病院の赤字」と「借金と貯金・指標」の2セクションを再編しました。数値と文章は決算概要と同一で、出典も同じ市政報告書に基づきます。概要だけ見たい方は <a href="kessan.html">決算概要ページ</a> へどうぞ。</p>
-<p class="note">※ 本ページの分析は、公開データを題材にした仮想の街『いわた』の分析演習です。</p>
-<p class="note">このページは analysis.html 1つだけ。外部通信・画像・広告・解析なし。JSなしでも読めます。</p>
+<h1>仮想街いわた 財政分析：令和7年度</h1>
 
-<section id="kadai" aria-labelledby="kadai-h">
-<h2 id="kadai-h">課題：市立病院の赤字がいちばん大きい</h2>
-<p>病院では診療にかかる経費（人件費・薬品代など）が収入を上回っています。水道・下水道も設備の更新や過去の借金返済で持ち出しがあります。</p>
-<table>
-<tr><th>会計</th><th>実質収支</th></tr>
-<tr><td>水道</td><td>▲12.3億円</td></tr>
-<tr><td>下水道</td><td>▲13.5億円</td></tr>
-<tr><td>病院</td><td>▲28.6億円</td></tr>
-</table>
-<p class="note">赤字が大きくなると、福祉や教育など他のサービスに影響が出るおそれがあります。今のうちに皆で話し合って整える必要があります。</p>
+<section id="summary">
+<div class="card">
+<p><strong>結論。</strong>財政の健全性を示す4指標はいずれも早期健全化基準を大きく下回り、返済負担は軽い。経常収支比率は1.6ポイント改善し、実質収支比率も改善した。</p>
+<p>一方で、財政力指数の単年度値は0.817から0.787へ悪化した。3カ年平均では0.798から0.801へ改善しているが、平均値が上がっても直近の自力財源は縮小している。</p>
+<p>また、全会計起債残高は969.6億円と総合計画の目標値（950億円以下）を19.6億円上回った。基金は減少傾向にあるが、財政調整基金67.9億円は目標（40億円以上）を27.9億円上回っている。</p>
+</div>
+<p class="note">出典：令和7年度 市政報告書 第3表・第10表・第12表。確定版を正本とする。</p>
 </section>
 
-<section id="shakkin" aria-labelledby="shakkin-h">
-<h2 id="shakkin-h">借金と貯金・指標</h2>
+<section id="soundness">
+<h2>健全化判断比率</h2>
 <table>
-<tr><th>項目</th><th>令和7年度</th></tr>
-<tr><td>借金残高（全会計）</td><td>969.6億円（前年より+49.2億円）</td></tr>
-<tr><td>うち一般会計分</td><td>617.0億円</td></tr>
-<tr><td>貯金（基金残高）</td><td>123.7億円（うち財政調整基金67.9億円）</td></tr>
-<tr><td>財政力指数</td><td>0.801</td></tr>
-<tr><td>経常収支比率</td><td>93.9%</td></tr>
-<tr><td>実質公債費比率</td><td>0.2%（返済負担は軽い）</td></tr>
-<tr><td>将来負担比率</td><td>7.8%</td></tr>
+<tr><th>指標</th><th>令和7年度</th><th>早期健全化基準</th><th>基準に対する割合</th></tr>
+<tr><td>実質赤字比率</td><td>－（黒字）</td><td>11.40%</td><td>該当なし</td></tr>
+<tr><td>連結実質赤字比率</td><td>－（黒字）</td><td>16.40%</td><td>該当なし</td></tr>
+<tr><td>実質公債費比率</td><td>0.2%</td><td>25.0%</td><td>0.8%</td></tr>
+<tr><td>将来負担比率</td><td>7.8%</td><td>350.0%</td><td>2.2%</td></tr>
 </table>
-<p class="note">借金の返済負担は軽く、災害への備えの貯金も一定あります。出典：第3表・第12表。</p>
+<p class="note">4項目すべてで早期健全化基準を下回る。「－」は黒字を示す。実質公債費比率・将来負担比率は基準に対して極めて低い水準である。</p>
 </section>
 
-<p class="more">▶ 関連ページ：<a href="method.html">分析手法</a>／<a href="sources.html">出典・参考資料</a>
-<a href="seisaku.html">制作手法</a>／<a href="dashboard.html">Dashboard（いわた）</a></p>
+<section id="elasticity">
+<h2>収支の弾力性</h2>
+<table>
+<tr><th>指標</th><th>令和6年度</th><th>令和7年度</th><th>変化</th></tr>
+<tr><td>財政力指数（3カ年平均）</td><td>0.798</td><td>0.801</td><td>+0.003</td></tr>
+<tr><td>財政力指数（単年度）</td><td>0.817</td><td>0.787</td><td>▲0.030</td></tr>
+<tr><td>実質収支比率</td><td>3.4%</td><td>4.6%</td><td>+1.2pt</td></tr>
+<tr><td>経常収支比率</td><td>95.5%</td><td>93.9%</td><td>▲1.6pt</td></tr>
+</table>
+<div class="warn">
+<strong>注意点：</strong>財政力指数は3カ年平均と単年度で方向が逆である。3カ年平均は過去3年分の平均値のため、単年度の悪化が平均に反映されるのは遅れる。直近の財政力をみる場合は単年度値（0.787）も併せて確認する必要がある。
+</div>
+<p>経常収支比率の改善は、経常経費の伸びを一般財源の伸びが上回ったことを示す。実質収支比率の改善は、実質収支（+19.5億円）が標準財政規模に対して相対的に大きくなったことを示す。</p>
+</section>
+
+<section id="debt">
+<h2>債務と基金</h2>
+<table>
+<tr><th>項目</th><th>令和6年度</th><th>令和7年度</th><th>変化</th><th>目標値</th></tr>
+<tr><td>全会計起債残高</td><td>920.4</td><td>969.6</td><td>+49.2</td><td>950以下</td></tr>
+<tr><td>普通会計起債残高</td><td>556.7</td><td>617.0</td><td>+60.3</td><td>－</td></tr>
+<tr><td>基金残高</td><td>132.9</td><td>123.7</td><td>▲9.2</td><td>－</td></tr>
+<tr><td>うち財政調整基金</td><td>75.7</td><td>67.9</td><td>▲7.8</td><td>40以上</td></tr>
+</table>
+<p class="note">単位：億円。目標値は第2次磐田市総合計画（令和8年度末）。全会計起債残高は目標を19.6億円超過。財政調整基金は目標を27.9億円上回る。</p>
+<p>起債残高の増加は普通会計で+60.3億円と大きい。事業の財源を地方債に依存する割合が高まっていることを示す。ただし、実質公債費比率0.2%、将来負担比率7.8%といった返済負担の指標は依然として低く、直ちに償還压力が生じる水準ではない。</p>
+</section>
+
+<section id="enterprise">
+<h2>公営企業の収支構造</h2>
+<table>
+<tr><th>事業</th><th>収益的収支</th><th>資本的収支</th><th>実質収支</th><th>赤字の性質</th></tr>
+<tr><td>水道事業</td><td>+3.5</td><td>▲15.8</td><td>▲12.3</td><td>設備更新・償還</td></tr>
+<tr><td>下水道事業</td><td>+3.6</td><td>▲17.0</td><td>▲13.5</td><td>設備更新・償還</td></tr>
+<tr><td>病院事業</td><td>▲20.8</td><td>▲7.9</td><td>▲28.6</td><td>経営そのもの</td></tr>
+</table>
+<p class="note">単位：億円。収益的収支は税込み。資本的収支の不足額と企業債発行額は別概念。</p>
+<p>水道・下水道は収益的収支では黒字だが、資本的収支の設備更新・過去債務の償還で赤字となっている。一方、病院事業は収益的収支そのものが▲20.8億円と赤字で、経営構造に課題がある。同じ「赤字」でも性質が異なるため、対処も分ける必要がある。</p>
+</section>
+
+<section id="evaluation">
+<h2>総合評価</h2>
+<div class="card">
+<p><strong>強み</strong></p>
+<ul>
+<li>健全化判断比率4項目すべてが早期健全化基準を大幅に下回る</li>
+<li>経常収支比率・実質収支比率がともに改善</li>
+<li>財政調整基金67.9億円は目標を27.9億円上回り、災害時の備えは十分</li>
+<li>実質公債費比率0.2%、将来負担比率7.8%と、返済負担は軽い</li>
+</ul>
+<p><strong>注視すべき点</strong></p>
+<ul>
+<li>財政力指数の単年度値が0.817→0.787と悪化（3カ年平均は改善）</li>
+<li>全会計起債残高が総合計画目標を19.6億円超過</li>
+<li>基金残高が前年比▲9.2億円、財政調整基金が▲7.8億円と減少</li>
+<li>病院事業の収益的収支▲20.8億円（経営そのものの赤字）</li>
+</ul>
+<p>全体として、財政の基盤は堅牢である。ただし、自力財源の縮小と起債残高の増加は中期的な注視事項であり、公営企業、とりわけ病院事業の経営改善が最大の課題である。</p>
+</div>
+</section>
+
+<section id="status">
+<h2>確認状況</h2>
+<div class="card">
+<p><strong>確認済み</strong></p>
+<ul>
+<li>健全化判断比率4項目が早期健全化基準を下回ること（第3表）</li>
+<li>財政力指数の3カ年平均・単年度の両方の数値（第3表）</li>
+<li>起債残高・基金残高が原本と一致すること（第3表・第10表）</li>
+<li>財政調整基金67.9億円が第10表の内訳と一致すること</li>
+<li>公営企業3事業の収益的・資本的収支（第2表）</li>
+</ul>
+<p><strong>未確認</strong></p>
+<ul>
+<li>財政力指数単年度値の悪化要因（税収減か、基準財政需要額の増か）</li>
+<li>起債残高の内訳（どの事業の借入が増えたか）</li>
+<li>病院事業の収益的収支▲20.8億円の内訳</li>
+</ul>
+</div>
+</section>
+
+<p class="more">▶ 関連：<a href="kessan.html">決算分析</a>／<a href="dashboard.html">Dashboard（いわた）</a></p>
+<p class="note">このページは、公開データを題材にした仮想の街『いわた』の分析演習である。実在の磐田市の公式情報ではない。</p>
+<p><a href="#top">ページ上部へ戻る</a></p>
 </main>
 
 <footer>
 <div class="wrap">
-<p>© 2026 超軽量サイト | 出典：公開オープンデータ「令和7年度 市政報告書」・数値照合表 | 単一HTML構成</p>
+<p>© 2026 財政分析 | 出典：公開オープンデータ「令和7年度 市政報告書」・数値照合表 | 単一HTML構成</p>
 </div>
 </footer>
 </body>
