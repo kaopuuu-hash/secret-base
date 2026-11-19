@@ -21,20 +21,23 @@ const map = L.map('map').setView([34.72, 137.85], 11);
 L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:18,attribution:'© OpenStreetMap | 国勢調査2020小地域(e-Stat) 境界:統計GIS'}).addTo(map);
 function c65(r){ return r>=0.4?'#800026':r>=0.32?'#BD0026':r>=0.28?'#E31A1C':r>=0.24?'#FC4E2A':r>=0.2?'#FD8D3C':'#FEB24C'; }
 function cs(r){ return r>=0.14?'#084594':r>=0.11?'#2171C5':r>=0.09?'#4292C6':r>=0.07?'#6BAED6':'#BDD7E7'; }
+function popHTML(p){var d65=p.rate65*100-28.5;return '<b>'+(p.S_NAME||p.KEY_CODE)+'</b><br>総人口:'+Math.round(p.JINKO)+'人 65歳以上:'+Math.round(p.pop65_est)+'人 ('+(p.rate65*100).toFixed(1)+'%)<br>75歳以上:'+Math.round(p.pop75_est)+'人 ('+(p.rate75*100).toFixed(1)+'%) 高齢単身世帯:'+Math.round(p.single_elderly_est)+'世帯 ('+(p.rate_single*100).toFixed(1)+'%)<br>市平均28.5%との差:'+(d65>=0?'+':'')+d65.toFixed(1)+'ポイント 世帯:'+Math.round(p.SETAI)+'<br>診療所数:'+p.n_clinics+' 最寄り診療所まで約'+Math.round(p.nearest_m)+'m';}
 const l65=L.geoJSON(TOWNS,{style:f=>({fillColor:c65(f.properties.rate65),weight:.6,color:'#fff',fillOpacity:.7}),
- onEachFeature:(f,l)=>l.bindPopup('<b>'+(f.properties.S_NAME||f.properties.KEY_CODE)+'</b><br>人口:'+Math.round(f.properties.JINKO)+' 65+率:'+(f.properties.rate65*100).toFixed(1)+'%<br>75+率:'+(f.properties.rate75*100).toFixed(1)+'% 診療所数:'+f.properties.n_clinics)});
+ onEachFeature:(f,l)=>l.bindPopup(popHTML(f.properties))});
 const lsg=L.geoJSON(TOWNS,{style:f=>({fillColor:cs(f.properties.rate_single),weight:.6,color:'#fff',fillOpacity:.7}),
- onEachFeature:(f,l)=>l.bindPopup('<b>'+(f.properties.S_NAME||f.properties.KEY_CODE)+'</b><br>世帯:'+Math.round(f.properties.SETAI)+' 高齢単身率:'+(f.properties.rate_single*100).toFixed(1)+'%<br>最寄り診療所まで約'+Math.round(f.properties.nearest_m)+'m')});
+ onEachFeature:(f,l)=>l.bindPopup(popHTML(f.properties))});
 l65.addTo(map);
 L.control.layers({"65歳以上率":l65,"高齢単身率":lsg},null,{collapsed:false}).addTo(map);
 const info=L.control({position:'topleft'});
 info.onAdd=function(){const d=L.DomUtil.create('div','info');
 d.innerHTML='<b>仮想街いわた 町丁別高齢化 (2020)</b><br>人口166,672・65歳47,581(28.5%)・75歳23,393・高齢単身5,783<br><small>タップで町丁の数字表示。層切替で高齢単身率に変更可。医院名なし。e-Stat小地域+KSJ医療機関</small><br><small>本サイトは、公開データを題材にした仮想の街『いわた』の分析演習です。</small>';
 return d;}; info.addTo(map);
+const LEG65='<b>65歳以上率</b><br><i style="background:#800026"></i>40%+<br><i style="background:#BD0026"></i>32%+<br><i style="background:#E31A1C"></i>28%+<br><i style="background:#FC4E2A"></i>24%+<br><i style="background:#FD8D3C"></i>20%+<br><i style="background:#FEB24C"></i>20%未満<br><small>2020国勢調査小地域(秘匿4地域は0扱い) 医院名なし</small>';
+const LEGSG='<b>高齢単身率</b><br><i style="background:#084594"></i>14%+<br><i style="background:#2171C5"></i>11%+<br><i style="background:#4292C6"></i>9%+<br><i style="background:#6BAED6"></i>7%+<br><i style="background:#BDD7E7"></i>7%未満<br><small>2020国勢調査小地域(秘匿4地域は0扱い) 医院名なし</small>';
+let lgDiv=null;
 const lg=L.control({position:'bottomright'});
-lg.onAdd=function(){const d=L.DomUtil.create('div','info legend');
-d.innerHTML='<b>65歳以上率</b><br><i style="background:#800026"></i>40%+<br><i style="background:#BD0026"></i>32%+<br><i style="background:#E31A1C"></i>28%+<br><i style="background:#FC4E2A"></i>24%+<br><i style="background:#FD8D3C"></i>20%+<br><i style="background:#FEB24C"></i>20%未満<br><small>2020国勢調査小地域(秘匿4地域は0扱い) 医院名なし</small>';
-return d;}; lg.addTo(map);
+lg.onAdd=function(){lgDiv=L.DomUtil.create('div','info legend');lgDiv.innerHTML=LEG65;return lgDiv;}; lg.addTo(map);
+map.on('baselayerchange',function(e){if(lgDiv)lgDiv.innerHTML=(e.name==='高齢単身率')?LEGSG:LEG65;});
 map.fitBounds(l65.getBounds());
 </script>
 </body>
