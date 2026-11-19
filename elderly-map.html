@@ -22,9 +22,9 @@ L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:18,attribu
 function c65(r){ return r>=0.4?'#800026':r>=0.32?'#BD0026':r>=0.28?'#E31A1C':r>=0.24?'#FC4E2A':r>=0.2?'#FD8D3C':'#FEB24C'; }
 function cs(r){ return r>=0.14?'#084594':r>=0.11?'#2171C5':r>=0.09?'#4292C6':r>=0.07?'#6BAED6':'#BDD7E7'; }
 const l65=L.geoJSON(TOWNS,{style:f=>({fillColor:c65(f.properties.rate65),weight:.6,color:'#fff',fillOpacity:.7}),
- onEachFeature:(f,l)=>l.bindPopup('<b>'+(f.properties.S_NAME||f.properties.KEY_CODE)+'</b><br>人口:'+Math.round(f.properties.JINKO)+' 65+率:'+(f.properties.rate65*100).toFixed(1)+'%<br>75+率:'+(f.properties.rate75*100).toFixed(1)+'% 診療所数:'+f.properties.n_clinics)})});
+ onEachFeature:(f,l)=>l.bindPopup('<b>'+(f.properties.S_NAME||f.properties.KEY_CODE)+'</b><br>人口:'+Math.round(f.properties.JINKO)+' 65+率:'+(f.properties.rate65*100).toFixed(1)+'%<br>75+率:'+(f.properties.rate75*100).toFixed(1)+'% 診療所数:'+f.properties.n_clinics)});
 const lsg=L.geoJSON(TOWNS,{style:f=>({fillColor:cs(f.properties.rate_single),weight:.6,color:'#fff',fillOpacity:.7}),
- onEachFeature:(f,l)=>l.bindPopup('<b>'+(f.properties.S_NAME||f.properties.KEY_CODE)+'</b><br>世帯:'+Math.round(f.properties.SETAI)+' 高齢単身率:'+(f.properties.rate_single*100).toFixed(1)+'%<br>最寄り診療所まで約'+Math.round(f.properties.nearest_m)+'m')})});
+ onEachFeature:(f,l)=>l.bindPopup('<b>'+(f.properties.S_NAME||f.properties.KEY_CODE)+'</b><br>世帯:'+Math.round(f.properties.SETAI)+' 高齢単身率:'+(f.properties.rate_single*100).toFixed(1)+'%<br>最寄り診療所まで約'+Math.round(f.properties.nearest_m)+'m')});
 l65.addTo(map);
 L.control.layers({"65歳以上率":l65,"高齢単身率":lsg},null,{collapsed:false}).addTo(map);
 const info=L.control({position:'topleft'});
