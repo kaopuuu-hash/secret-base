@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="仮想街いわた 町丁別高齢化マップの総括。全体像、地域パターン、医療との重ね、限界と注意、次の一手をまとめた読み物ページ。">
+<title>仮想街いわた 町丁別高齢化 — 総括</title>
+<style>
+:root{
+  --bg:#faf8f4; --card:#ffffff; --ink:#2b2b2b; --muted:#6b6b6b;
+  --accent:#1f6feb; --accent-soft:#e8f0fe; --line:#e5e0d8; --radius:12px;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","Noto Sans JP",sans-serif;
+  line-height:1.7}
+header.top{background:#1c2b39;color:#fff;padding:20px 16px}
+header.top h1{margin:0 0 4px;font-size:1.25rem}
+header.top p{margin:0;color:#c8d3de;font-size:.85rem}
+nav.bread{padding:10px 16px;font-size:.85rem;color:var(--muted)}
+nav.bread a{color:var(--accent);text-decoration:none}
+main{max-width:960px;margin:0 auto;padding:0 16px 48px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+  padding:16px;margin:14px 0;box-shadow:0 1px 3px rgba(0,0,0,.05)}
+.card h2{margin:0 0 8px;font-size:1.05rem}
+.card ul{margin:0;padding-left:1.4em}
+.card li{margin:4px 0}
+.src{font-size:.78rem;color:var(--muted);margin-top:10px}
+.src a{color:var(--accent)}
+footer{border-top:1px solid var(--line);padding:16px;text-align:center;
+  font-size:.78rem;color:var(--muted)}
+.notice{background:#fff8e6;border:1px solid #e8d9a8;border-radius:var(--radius);
+  padding:12px 16px;font-size:.85rem;margin:14px 0}
+</style>
+</head>
+<body>
+<header class="top">
+<h1>仮想街いわた 町丁別高齢化 — 総括</h1>
+</header>
+<nav class="bread"><a href="data.html">地域データ置き場</a> ／ <a href="elderly-map.html">地図を見る</a></nav>
+<main>
+<div class="notice">本サイトは、公開データを題材にした仮想の街『いわた』の分析演習です。</div>
+<section class="card">
+<h2>1. 全体像</h2>
+<ul>
+<li>市人口166,672人、高齢化率28.5%(65+47,581人)、75+23,393人</li>
+<li>高齢単身5,783世帯(一般世帯の8.9%)</li>
+<li>高齢化は一様ではなく、町丁で10%台〜56%まで開きがある</li>
+</ul>
+</section>
+<section class="card">
+<h2>2. 地域パターン</h2>
+<ul>
+<li>北部山間(一色56.3%、下神増50.9%): 人口は少ないが率が極端に高い</li>
+<li>掛塚地区(掛塚東町49.2%等): 人口千人規模で率も高い。人数の重みが大きい</li>
+<li>東新町二・三丁目(約50%): 団地系の高齢化と見られる</li>
+<li>中心部(中泉・西町・東町): 率は中位だが高齢単身が集まる</li>
+</ul>
+</section>
+<section class="card">
+<h2>3. 二つの顔</h2>
+<ul>
+<li>「率の高さ」と「人数の多さ」は別物</li>
+<li>山間は率は高いが人数は少ない。掛塚・中心部は人数が多い</li>
+<li>高齢単身率は小立野19.5%、東新町一丁目19.0%が突出。見守りの重点候補</li>
+</ul>
+</section>
+<section class="card">
+<h2>4. 医療との重ね</h2>
+<ul>
+<li>内部用に医院別商圏147を算出済み(公開は町丁版のみ)</li>
+<li>掛塚一帯は1医院あたりの75+が平均の2倍超。負荷が高い</li>
+<li>中心部は医院数が多く、商圏は細分化される</li>
+</ul>
+</section>
+<section class="card">
+<h2>5. 限界と注意</h2>
+<ul>
+<li>秘匿4地域は0扱い(人数極小のため全体への影響は軽微)</li>
+<li>面積按分の誤差0.18%(基準0.5%以内)</li>
+<li>病院までの距離は直線。実際の移動時間ではない</li>
+<li>2020年時点の数字。最新ではない</li>
+</ul>
+</section>
+<section class="card">
+<h2>6. 次の一手</h2>
+<ul>
+<li>高齢単身の多い町丁から見守り・相談窓口の優先付け</li>
+<li>掛塚圏の負荷分散(巡回・連携)の検討材料に</li>
+<li>更新時は国勢調査の次回結果で差し替え</li>
+</ul>
+</section>
+<p class="src">▶ <a href="elderly-map.html">地図を見る（仮想街いわた 町丁別高齢化マップ）</a> ／ <a href="data.html">地域データ置き場へ戻る</a></p>
+</main>
+<footer>仮想街いわた 町丁別高齢化 — 総括</footer>
+</body>
+</html>
