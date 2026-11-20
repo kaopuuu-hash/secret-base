@@ -65,8 +65,8 @@
   <div class="kpi"><div class="label">地区数</div><div class="value">299</div><div class="sub">仮想街いわた全域（令和8年9月）</div></div>
   <div class="kpi"><div class="label">総人口</div><div class="value">162,983人</div><div class="sub">令和8年9月末</div></div>
   <div class="kpi"><div class="label">65歳以上</div><div class="value">30.1%</div><div class="sub">49,104人</div></div>
-  <div class="kpi"><div class="label">空き家バンク</div><div class="value">6件</div><div class="sub">掲載物件数</div></div>
-  <div class="kpi"><div class="label">データ取得状況</div><div class="value">8/8</div><div class="sub">必須データのうち取得済み</div></div>
+  <div class="kpi"><div class="label">空き家バンク</div><div class="value">6件</div><div class="sub">掲載物件数（令和8年8月確認）</div></div>
+  <div class="kpi"><div class="label">データ取得状況</div><div class="value">8/8</div><div class="sub">必須データのうち取得済み（人口：令和8年9月末／空き家統計：令和5年／バンク：令和8年8月／建物：2023年ほか）</div></div>
 </div>
 
 <section>
@@ -177,7 +177,7 @@
     <tr><td>2018年</td><td>70,010</td><td>8,500</td><td>12.1%</td><td>—</td></tr>
     <tr><td>2023年</td><td>73,360</td><td>7,840</td><td>10.7%</td><td>13.8%</td></tr>
   </table>
-  <p class="note">出典：総務省 住宅・土地統計調査（e-Stat 表番号 0004021421・0004021631）。2013年をピークに減少。全国平均 13.8% より 3.1pt 低い。持ち家率 64.2%、借家率 19.7%。</p>
+  <p class="note">出典：総務省 住宅・土地統計調査（e-Stat 表番号 0004021421・0004021631）。2013年をピークに減少。全国平均 13.8%(令和5年) より 3.1pt 低い。持ち家率 64.2%、借家率 19.7%。</p>
 </section>
 
 </div><div class="panel" id="p-pop"><section>
@@ -236,7 +236,7 @@
 <section>
   <h2>人口分布マップ — 地区別人口（令和2年）</h2>
   <div id="popmap" style="height:480px;border-radius:8px;border:1px solid var(--line);"></div>
-  <p class="caption">図2 地区別人口の choropleth（令和2年 国勢調査ベース、仮想街いわた都市計画基礎調査）。328地区、総人口 166,982人。</p>
+  <p class="caption">図2【令和2年】地区別人口の choropleth（国勢調査ベース、仮想街いわた都市計画基礎調査）。328地区、総人口 166,982人。</p>
   <p class="note">地区境界は都市計画基礎調査の地区ポリゴン（JGD2000 Zone8 → WGS84）。人口は令和2年値。より新しい令和8年9月の町別人口（299町、162,983人）は「人口構造」セクションを参照。</p>
   <script>
     (window.__mapInits = window.__mapInits || []).push(function(){
@@ -335,6 +335,7 @@
       <p class="note">平均リスクスコア: 54.5（0-100）。利用可能な3指標の加重平均で算出。※2026-11-06、人口減少率の符号の取り違え（人口が増加した地区を高リスクと誤判定していた）を修正し、制作者のモデル改訂（厳密照合のみ、部分一致は廃止）に合わせて全地区を再計算しました。人口減少率データのある地区は157地区です。</p>
     </div>
   </div>
+  <p class="note">※空き家率は全市一律10.7%(令和5年)を参考値として使用。地区別実測ではない</p>
   <h3>高リスク地区 Top 10</h3>
   <table>
     <tr><th>順位</th><th>地区</th><th>リスクスコア</th><th>高齢化率</th><th>人口</th></tr>
