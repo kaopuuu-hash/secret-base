@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="オープンデータ活用プロジェクト総括。いわた中心の取り組み（第1期、2026年11月1日〜21日）の記録、作ったものと実測の数字、作り方の方針。">
+<title>オープンデータ活用プロジェクト総括</title>
+<style>
+:root{
+  --bg:#faf8f4; --card:#ffffff; --ink:#2b2b2b; --muted:#6b6b6b;
+  --accent:#1f6feb; --accent-soft:#e8f0fe; --line:#e5e0d8; --radius:12px;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","Noto Sans JP",sans-serif;
+  line-height:1.7}
+header.top{background:#1c2b39;color:#fff;padding:20px 16px}
+header.top h1{margin:0 0 4px;font-size:1.25rem}
+header.top p{margin:0;color:#c8d3de;font-size:.85rem}
+nav.bread{padding:10px 16px;font-size:.85rem;color:var(--muted)}
+nav.bread a{color:var(--accent);text-decoration:none}
+main{max-width:960px;margin:0 auto;padding:0 16px 48px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+  padding:16px;margin:14px 0;box-shadow:0 1px 3px rgba(0,0,0,.05)}
+.card h2{margin:0 0 8px;font-size:1.05rem}
+.card ul{margin:0;padding-left:1.4em}
+.card li{margin:4px 0}
+.card p{margin:0 0 8px}
+.card p:last-child{margin-bottom:0}
+.card a{color:var(--accent)}
+.card table{border-collapse:collapse;margin:8px 0;font-size:.95rem}
+.card th,.card td{border:1px solid var(--line);padding:6px 12px;text-align:left}
+.card th{background:var(--accent-soft)}
+.card td.num{text-align:right}
+.src{font-size:.78rem;color:var(--muted);margin-top:10px}
+.src a{color:var(--accent)}
+footer{border-top:1px solid var(--line);padding:16px;text-align:center;
+  font-size:.78rem;color:var(--muted)}
+</style>
+</head>
+<body>
+<header class="top">
+<h1>オープンデータ活用プロジェクト総括</h1>
+</header>
+<nav class="bread"><a href="data.html">地域データ置き場</a></nav>
+<main>
+<section class="card">
+<h2>期間と区切り</h2>
+<ul>
+<li>期間: 2026年11月1日〜2026年11月21日</li>
+<li>2026年11月21日に、いわた中心の取り組み（第1期）の区切りを宣言しました。公開したページはそのまま残します。</li>
+<li>オープンデータ自体を終えるわけではありません。面白いテーマがあれば、富士宮など他の町を対象に続けることもあります。</li>
+</ul>
+</section>
+<section class="card">
+<h2>作ったもの</h2>
+<ul>
+<li>17テーマ分析: テーマ01（公共施設×人口）からテーマ17（将来シナリオ）までの分析レポートと、テーマ別の深掘り（食料アクセス、テーマ02 人口構造、テーマ06 医療・福祉施設、テーマ11 災害リスク）</li>
+<li>仮想街の17テーマサイト4つ: いわた、もり、ふくろい、かけがわ</li>
+<li>データ: ページ、分析ページ、ダッシュボード2種（簡易版・詳細版）</li>
+<li>町丁別高齢化マップ（311町丁）と、その総括ページ</li>
+<li>分析数式リスト（テーマ01〜15で使う数式の一覧）</li>
+<li>単発の調査: 空き家・地域住宅ストック分析、静岡の気候</li>
+<li>リンク集と、作り方・出典をまとめた資料ページ</li>
+</ul>
+</section>
+<section class="card">
+<h2>実測の数字</h2>
+<p>公開ページの数は、2026年11月1日時点で8ページでした。2026年11月22日に、3つのリポジトリ内にあるHTMLファイルをGitHub APIで数えた結果は、次のとおりです。</p>
+<table>
+<tr><th>リポジトリ</th><th>HTMLファイル数</th></tr>
+<tr><td>secret-base</td><td class="num">128</td></tr>
+<tr><td>iwata-open-data-analysis</td><td class="num">16</td></tr>
+<tr><td>iwata-open-data-themes</td><td class="num">42</td></tr>
+<tr><td>合計</td><td class="num">186</td></tr>
+</table>
+<p>注記: 上の数はリポジトリ内にあるHTMLファイルの総数で、旧版や試作のファイルも含みます。数えた方法は、GitHub APIのgit treeによる全ファイル走査です。</p>
+</section>
+<section class="card">
+<h2>作り方の方針だったこと</h2>
+<ul>
+<li>軽さが物差し: 基本は単一HTML、JavaScriptなし、外部読み込みなし。阿部寛の公式サイト級の軽さを基準にしてきました。地図やダッシュボードなど、必要なものだけを例外にしました</li>
+<li>「仮想街」の表示: 本物の行政のページと誤解されないよう、表示上の地名は「仮想街いわた」などに置き換えました。データそのものには手を入れていません</li>
+<li>一次情報優先: 数字には出典を付け、元の資料に当たって確認する方針で進めました</li>
+</ul>
+</section>
+<section class="card">
+<h2>次のテーマ</h2>
+<p>次のテーマは「文字とAI」です。入口は「<a href="kanji-ai.html">AI時代における漢字の在り方</a>」に置きました。</p>
+</section>
+</main>
+<footer>オープンデータ活用プロジェクト総括</footer>
+</body>
+</html>
