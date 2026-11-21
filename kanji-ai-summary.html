@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="書道AI研究まとめ（2026-11-21）。調査と観察の総括。筆圧・速度つきの毛筆実測データが世界的に公開されていない「データの空白」と、研究の問い、結論。">
+<title>書道AI研究まとめ（2026-11-21）</title>
+<style>
+:root{
+  --bg:#faf8f4; --card:#ffffff; --ink:#2b2b2b; --muted:#6b6b6b;
+  --accent:#1f6feb; --accent-soft:#e8f0fe; --line:#e5e0d8; --radius:12px;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","Noto Sans JP",sans-serif;
+  line-height:1.7}
+header.top{background:#1c2b39;color:#fff;padding:20px 16px}
+header.top h1{margin:0 0 4px;font-size:1.25rem}
+header.top p{margin:0;color:#c8d3de;font-size:.85rem}
+nav.bread{padding:10px 16px;font-size:.85rem;color:var(--muted)}
+nav.bread a{color:var(--accent);text-decoration:none}
+main{max-width:960px;margin:0 auto;padding:0 16px 48px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+  padding:16px;margin:14px 0;box-shadow:0 1px 3px rgba(0,0,0,.05)}
+.card h2{margin:0 0 8px;font-size:1.05rem}
+.card ul{margin:0;padding-left:1.4em}
+.card li{margin:4px 0}
+.card p{margin:0 0 8px}
+.card p:last-child{margin-bottom:0}
+.card a{color:var(--accent)}
+.src{font-size:.78rem;color:var(--muted);margin-top:10px}
+.src a{color:var(--accent)}
+footer{border-top:1px solid var(--line);padding:16px;text-align:center;
+  font-size:.78rem;color:var(--muted)}
+</style>
+</head>
+<body>
+<header class="top">
+<h1>書道AI研究まとめ（2026-11-21）</h1>
+</header>
+<nav class="bread"><a href="kanji-ai.html">AI時代における漢字の在り方</a></nav>
+<main>
+<section class="card">
+<h2>1. 経緯</h2>
+<ul>
+<li>オープンデータ活用プロジェクトを終え、次のテーマとして書道（漢字×AI）へ方向転換した。</li>
+<li>起点は、書画展で本物の書画を自分の目で見たこと。「それらしい絵」と本物の書道の差を、AIの実態調査と突き合わせて確認した1日だった。</li>
+<li>問題意識：漢字は一文字の中に意味・形・筆順・余白まで詰まっており、音を写すだけの英文字とは情報密度が別次元。だからAIにとって一番難しく、一番面白い題材になる。</li>
+<li>書道の核心は、余白、はね・はらい・とめ、空間認識。ただし核心の部分は言語化不可能で、その「言葉にすると抜け落ちる部分」こそ書道であり、AIにも一番届いていないところ。</li>
+</ul>
+</section>
+<section class="card">
+<h2>2. 世界の状況</h2>
+<p>分類は「何を再現しようとしているか」で4つ：画像生成型／過程型／ロボット／保存・教育。</p>
+<ul>
+<li>主流は画像生成型。中国の zi2zi 系譜（GAN→拡散モデル、TTFフォント実用化志向）と UniCalli（単字ではなく「列」単位の生成）が代表。日本では香川大学がGANで空海の筆跡を再現。</li>
+<li>過程型はごく少数。enpts/sho（AI書道コンクール）と台湾の inkField 程度。欧米発の同型は見つからなかった。</li>
+<li>ロボット型は中国・台湾に複数（アームに実際の筆を持たせる）。</li>
+<li>台湾は層が厚い。淡江大学の e筆システムは書家本人が20年以上主導する「書き手主導」型で、教育・保存・体験への実装が中心。政府系（経済部・中央研究院）の典藏整備も厚い。</li>
+<li>日本の過程型研究には南山大学の仮想毛筆書道システム（センサ実測＋シミュレーション）もあるが、実測データは非公開。</li>
+</ul>
+</section>
+<section class="card">
+<h2>3. shoとAI書道コンクール</h2>
+<ul>
+<li>仕組み：言語モデルが「筆運びのデータ」（点ごとの座標・筆圧・角度・速さ・溜め、JSON Lines）を設計し、毛筆物理エンジン sho.js がそれを描く。モデルは運筆、エンジンは物理だけを受け持つ分担。</li>
+<li>字の配置・大きさ・余白（章法）の設計もモデル側の仕事。システムプロンプトは章法の数値目安や永字八法の手本を含む「書道の教科書の圧縮版」。</li>
+<li>コンクールは50モデル・全499作品。観察メモでは23作品を静止画で観察した。</li>
+<li>運筆の所見：上位モデル（Opus 5.5、Gemini 4 Argon）は筆圧の強弱・払い・かすれを使い分ける。失敗の型は3つ。(1) 細く速く全面かすれ、(2) 塗りつぶしの塊、(3) 画が字形を成さない。</li>
+<li>章法の所見：4字課題は「2列×2段で大きく書く型」と「1列に小さく書く型」に分かれ、大きく書く型ほど安定。紙面全体を先に設計できるかで差が出た。</li>
+<li>漢字の崩壊は羅・象・創など多画数の字に集中し、部首の置換・省略が典型。一方、漢字で崩れたモデルが絵文字の猫では見事に描けた。弱点は描画力ではなく、「決められた字形を座標の列として頭の中で設計する力」にある。</li>
+</ul>
+</section>
+<section class="card">
+<h2>4. データの空白</h2>
+<ul>
+<li>取れるもの：KanjiVG（漢字・かな約1.1万字の筆順・パスデータ、GitHubから取得可）、CASIA（実筆の軌跡・約390万サンプル。ただし座標と順序のみ、筆圧なし）。</li>
+<li>取れないもの：本物の毛筆の運筆データ（筆圧・速度つきの実測）は世界的に公開されていない。筆圧・速度のパラメータまで入った書道データは、sho の教材サンプル（少量）が唯一の公開例。</li>
+<li>毛筆の実測データは大学・製品の内部にあり非公開。ここは空白地帯。</li>
+</ul>
+</section>
+<section class="card">
+<h2>5. CADとの対比</h2>
+<ul>
+<li>CAD：AIが出すのは短いパラメータの指示で、幾何計算と正しさの担保はCADカーネルが担う。多少の狂いはソフト側が吸収する。</li>
+<li>書道：AIが出すのは数百点の生の座標で、字形を担保するカーネルが存在しない。エンジンが計算するのは墨と筆の物理だけで、AIがカーネルの役まで一人で担わされている。</li>
+<li>学習データの差もある。「漢字を座標の列として書く」データは世界にほぼ存在しない（4の空白）。</li>
+<li>改善案：KanjiVG の字形の骨組みをカーネル代わりに渡せば制御は改善するはず。未実施の余地として残る。</li>
+</ul>
+</section>
+<section class="card">
+<h2>6. 研究の問い</h2>
+<p>AIは、書道の空間（余白・章法）と、筆圧・速度を、どこまで扱えるか。</p>
+</section>
+<section class="card">
+<h2>7. 次の段階</h2>
+<ul>
+<li>当面は観察フェーズ（調査メモと観察メモが土台）。</li>
+<li>enpitsu 氏へ X で接触を試みる。下書きは作成済み、送信は本人。</li>
+<li>実験（Kaggle等）は、本人の合図が出てから。sho の仕組みのコピーではなく、自分の問いを立てる側で進める。</li>
+</ul>
+</section>
+<p class="src">▶ <a href="kanji-ai.html">AI時代における漢字の在り方（トップ）へ戻る</a></p>
+</main>
+<footer>書道AI研究まとめ（2026-11-21）</footer>
+</body>
+</html>

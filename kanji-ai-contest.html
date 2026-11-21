@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="AI書道コンクールを観察した記録。全499作品のうち23作品を静止画で観察。失敗の型は3つ、章法は2つの型に分かれた。">
+<title>AI書道コンクールを観察した</title>
+<style>
+:root{
+  --bg:#faf8f4; --card:#ffffff; --ink:#2b2b2b; --muted:#6b6b6b;
+  --accent:#1f6feb; --accent-soft:#e8f0fe; --line:#e5e0d8; --radius:12px;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","Noto Sans JP",sans-serif;
+  line-height:1.7}
+header.top{background:#1c2b39;color:#fff;padding:20px 16px}
+header.top h1{margin:0 0 4px;font-size:1.25rem}
+header.top p{margin:0;color:#c8d3de;font-size:.85rem}
+nav.bread{padding:10px 16px;font-size:.85rem;color:var(--muted)}
+nav.bread a{color:var(--accent);text-decoration:none}
+main{max-width:960px;margin:0 auto;padding:0 16px 48px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+  padding:16px;margin:14px 0;box-shadow:0 1px 3px rgba(0,0,0,.05)}
+.card h2{margin:0 0 8px;font-size:1.05rem}
+.card ul{margin:0;padding-left:1.4em}
+.card li{margin:4px 0}
+.card ol{margin:0;padding-left:1.4em}
+.card ol li{margin:4px 0}
+.card p{margin:0 0 8px}
+.card p:last-child{margin-bottom:0}
+.card a{color:var(--accent)}
+.src{font-size:.78rem;color:var(--muted);margin-top:10px}
+.src a{color:var(--accent)}
+footer{border-top:1px solid var(--line);padding:16px;text-align:center;
+  font-size:.78rem;color:var(--muted)}
+</style>
+</head>
+<body>
+<header class="top">
+<h1>AI書道コンクールを観察した</h1>
+</header>
+<nav class="bread"><a href="kanji-ai.html">AI時代における漢字の在り方</a></nav>
+<main>
+<section class="card">
+<ul>
+<li>対象: AI書道コンクール（<a href="https://aishodo.enpitsu.org/">https://aishodo.enpitsu.org/</a> ）</li>
+<li>観察範囲: 全499作品のうち23作品を、サイト掲載の静止画で観察した。残りは未観察であり、以下の所見はこの範囲のもの。</li>
+</ul>
+<p>このコンクールでは、言語モデルが画像ではなく「筆運びデータ」を出力する。点ごとに [x, y, 筆圧, 角度, 速さ, 溜め] を並べたデータで、字形・構成・筆づかいの判断はすべてモデル側に委ねられ、描画は書道エンジンが筆と紙の物理を再現する。</p>
+</section>
+<section class="card">
+<h2>失敗の型は3つ</h2>
+<p>弱いモデルには失敗の型が3つある。</p>
+<ol>
+<li>線が細く速すぎて全面かすれになる</li>
+<li>画が塗りつぶしの塊になる</li>
+<li>画の列自体が字形を成さない</li>
+</ol>
+</section>
+<section class="card">
+<h2>章法は2つの型に分かれた</h2>
+<p>4字課題の構成は大きく2型に分かれた。「2列×2段で紙いっぱいに大きく書く」型と、「1列縦に小さめに書く」型である。後者は余白が余り、字が小さいほど弱さが目立つ。紙面全体を先に設計できているモデルと、1字ずつ積んで破綻するモデルの差が出た。</p>
+</section>
+<section class="card">
+<h2>漢字の崩壊は多画数に集中する</h2>
+<p>崩壊は画数の多い字（羅・象・創）に集中する。典型は部首の置換・省略で、羅の糸部はほぼ全モデルで塊や別部品に化けた。一方、漢字で崩れたモデルが、絵文字の課題では見事に描けた例がある。ボトルネックは描画力そのものではなく、「決められた字形を、正確な座標列として頭の中だけで設計する」能力にある。</p>
+</section>
+<section class="card">
+<h2>研究の問い</h2>
+<p>AIは、書道の空間（余白・章法）と、筆圧・速度を、どこまで扱えるか。</p>
+</section>
+<p class="src">▶ <a href="kanji-ai.html">AI時代における漢字の在り方（トップ）へ戻る</a></p>
+</main>
+<footer>AI書道コンクールを観察した</footer>
+</body>
+</html>

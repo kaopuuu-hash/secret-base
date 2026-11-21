@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="書道AI調査メモ（2026-11-21）。書道×AIを「何を再現しようとしているか」で分類し、日本・中国・台湾・英語圏の取り組みとデータの入手可能性を調べた記録。">
+<title>書道AI調査メモ（2026-11-21）</title>
+<style>
+:root{
+  --bg:#faf8f4; --card:#ffffff; --ink:#2b2b2b; --muted:#6b6b6b;
+  --accent:#1f6feb; --accent-soft:#e8f0fe; --line:#e5e0d8; --radius:12px;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","Noto Sans JP",sans-serif;
+  line-height:1.7}
+header.top{background:#1c2b39;color:#fff;padding:20px 16px}
+header.top h1{margin:0 0 4px;font-size:1.25rem}
+header.top p{margin:0;color:#c8d3de;font-size:.85rem}
+nav.bread{padding:10px 16px;font-size:.85rem;color:var(--muted)}
+nav.bread a{color:var(--accent);text-decoration:none}
+main{max-width:960px;margin:0 auto;padding:0 16px 48px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+  padding:16px;margin:14px 0;box-shadow:0 1px 3px rgba(0,0,0,.05)}
+.card h2{margin:0 0 8px;font-size:1.05rem}
+.card ul{margin:0;padding-left:1.4em}
+.card li{margin:4px 0}
+.card p{margin:0 0 8px}
+.card p:last-child{margin-bottom:0}
+.card a{color:var(--accent)}
+.src{font-size:.78rem;color:var(--muted);margin-top:10px}
+.src a{color:var(--accent)}
+footer{border-top:1px solid var(--line);padding:16px;text-align:center;
+  font-size:.78rem;color:var(--muted)}
+</style>
+</head>
+<body>
+<header class="top">
+<h1>書道AI調査メモ（2026-11-21）</h1>
+</header>
+<nav class="bread"><a href="kanji-ai.html">AI時代における漢字の在り方</a></nav>
+<main>
+<section class="card">
+<p>書道×AIの世界調査のまとめ。分類の軸は「何を再現しようとしているか」。</p>
+</section>
+<section class="card">
+<h2>分類</h2>
+<ul>
+<li>画像生成型：完成した字の「画像」を生成する。フォント生成・スタイル変換が中心</li>
+<li>過程型：筆運び（運筆データ）そのものを対象にする。書く行為の再現</li>
+<li>ロボット：ロボットアームに実際の筆を持たせて書かせる。フィジカルな再現</li>
+<li>保存・教育：筆跡や碑帖のデジタル保存、学習・体験への活用</li>
+</ul>
+</section>
+<section class="card">
+<h2>日本</h2>
+<ul>
+<li>香川大学・岡崎慎一郎准教授：GANで空海の筆跡を再現。「空海フォント」の完成が目標。書道専門の教授の監修付き（画像生成型）</li>
+<li>南山大学・金山知俊講師：仮想毛筆書道システム。毛筆の動きをセンサで取り込み、穂先の変形と墨の伝搬をシミュレーションする（過程型。実測データは非公開）</li>
+<li>enpts/sho と AI書道コンクール（2026年11月公開）：言語モデルに運筆データ（座標・筆圧・角度・速さ・溜め）を設計させ、毛筆物理エンジン sho.js が描く。エンジンとシステムプロンプト（書道の教科書の圧縮版、章法の指示と永字八法の手本を含む）が GitHub で公開されている（過程型） <a href="https://github.com/enpts/sho">https://github.com/enpts/sho</a></li>
+<li>山梨大学・清水文博准教授ほか：「文字文化」としての手書き文字の教育研究。生成AIによる書字規範の今後にも言及（保存・教育）</li>
+</ul>
+</section>
+<section class="card">
+<h2>中国</h2>
+<ul>
+<li>zi2zi 系譜：条件付きGANによる書体スタイル変換の古典（スター約2,755）。後継 zi2zi-JiT は拡散モデル（Diffusion Transformer）へ移行。生成した字をTTFフォントとして実用化する志向が強い（画像生成型）</li>
+<li>UniCalli 公式実装：拡散モデルで、単字ではなく「列（縦の連なり）」単位の生成と認識を統一。章法に近い単位を扱う点が新しい（画像生成型） <a href="https://github.com/EnVision-Research/UniCalli">https://github.com/EnVision-Research/UniCalli</a></li>
+<li>OLHWG（ICLR 2025）：オンライン手書き生成。配置（レイアウト）と字形を分離してストローク列を生成する、過程型として最も本格的な学術研究（過程型）</li>
+<li>ロボット書道群：ロボットアーム＋多指ハンド＋深度カメラで筆パスを生成して書かせる試みなど（ロボット）</li>
+<li>その他：CalliGAN（少量サンプルからの書体学習）、個人書家スタイルの再現システム（劉春霖の小楷で詩詞を生成）など。画像生成型が圧倒的主流</li>
+</ul>
+</section>
+<section class="card">
+<h2>台湾</h2>
+<ul>
+<li>淡江大学「e筆書畫系統／智慧e筆」（書家・張炳煌氏＋資訊工程系、2000年から23年以上）：タブレット上で毛筆の筆触を再現し、「書く過程そのもの」を記録・再生できるのが核。故宮南院での臨摹体験、小学校の書法授業に導入。AI化で、章法（全体配置と落款）の自動生成、欠字の風格一貫生成、自分の字の美化、名家風格変換、大型言語モデルの組み込み（2026年11月の新版）まで進んでいる（過程型＋保存・教育）</li>
+<li>経済部・印刷研究中心「AI臨摹科技」（2026年2月発表）：碑帖・巻軸・拓片から約18万字を収集してAI学習用に整備。筆路（筆の通り道）の再建と風格の埋め込みで、存在しない字も新規生成する（画像生成型＋保存）</li>
+<li>中央研究院のデジタル典藏：歴史文字資料庫統合検索系統（文字画像約150万件、IIIF準拠で単字の字形を横断検索可能）など、保存・基盤側が厚い（保存・教育）</li>
+<li>HanziGen（台湾、ICCE-Taiwan 2026公式実装）：フォント生成と欠けた字の補完（画像生成型） <a href="https://github.com/wangwenho/HanziGen">https://github.com/wangwenho/HanziGen</a></li>
+<li>inkField：WebGL水墨画システム。全ての筆運びをJSONで記録・再生し、「AIエージェント歓迎」を公式に掲げる（過程型） <a href="https://github.com/ileivoivm/inkField">https://github.com/ileivoivm/inkField</a></li>
+<li>ロボット書道：台大・中正大・明道大の3校連携で、王羲之の行書と宋徽宗の瘦金体をアームが実際に書く（ロボット）</li>
+<li>全体傾向：繁体字で書道が教育と年中行事に残る国らしく、性能競争よりも教育・保存・体験への実装が厚く、書家本人が主導する「書き手主導」型が象徴的</li>
+</ul>
+</section>
+<section class="card">
+<h2>英語圏</h2>
+<ul>
+<li>inkField（作者は台湾系と見られる）：英語圏の調査でも最も sho に近い発想として見つかったのはこの1件。対象は書道の字ではなく水墨画全般</li>
+<li>土台技術：SketchRNN（Google、絵を画像ではなくペンの軌跡列として生成）と Graves の手書き生成（RNNがストローク列を生成）が、「過程をデータとして作る」発想の原点</li>
+<li>欧米発で「LLMに運筆を設計させる × 毛筆物理エンジン × 書道」に特化した同型プロジェクトは、調査範囲では見つからなかった</li>
+</ul>
+</section>
+<section class="card">
+<h2>データの入手可能性</h2>
+<ul>
+<li>KanjiVG：漢字・かな約1.1万字分のSVG。画ごとのパス＋筆順＋画の種類（止め・はね等の属性）。GitHub から clone で全データ取得可（CC BY-SA 3.0） <a href="https://github.com/KanjiVG/kanjivg">https://github.com/KanjiVG/kanjivg</a></li>
+<li>CASIA-OLHWDB（中国科学院）：実際にペンで書いた軌跡の大規模データ（約390万サンプル）。ただし中身は座標と順序のみで、筆圧はない。GitHub に実データ入りのミラーもある</li>
+<li>sho の教材サンプル：「永」永字八法の全画データと技法サンプル群。点は [x, y, 筆圧, 角度, 速さ, 溜め] の形式で、筆圧・速度のパラメータまで含む唯一の公開例。ただし実筆の計測ではなく教材用に設計された少量のサンプル</li>
+<li>空白地帯：本物の毛筆の運筆データ（実筆で、筆圧・速度つき）は、GitHub の公開データとしては存在しない。毛筆の実測データは南山大学や淡江大学など研究・製品の内部にあり、非公開</li>
+</ul>
+</section>
+<section class="card">
+<h2>研究の問い</h2>
+<p>AIは、書道の空間（余白・章法）と、筆圧・速度を、どこまで扱えるか。</p>
+<ul>
+<li>画像生成型は「字の見た目」には強いが、過程を持たない</li>
+<li>過程型は「行為の跡」を再現しようとするが、LLMは自分の描画を見られない一発勝負で、空間設計の負荷が漢字で跳ね上がる</li>
+<li>肝心の学習・評価用データ（筆圧・速度つきの毛筆実測）が世界的に公開されていない</li>
+</ul>
+</section>
+<p class="src">▶ <a href="kanji-ai.html">AI時代における漢字の在り方（トップ）へ戻る</a></p>
+</main>
+<footer>書道AI調査メモ（2026-11-21）</footer>
+</body>
+</html>
