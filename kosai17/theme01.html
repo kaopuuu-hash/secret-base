@@ -1,0 +1,17 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>テーマ01 公共施設×人口｜仮想街こさい17テーマ</title>
+<link rel="stylesheet" href="assets/leaflet.css">
+<link rel="stylesheet" href="assets/style.css"></head><body>
+<header class="top"><h1>仮想街こさい17テーマ</h1><p>静岡県仮想街こさい（自治体コード22221）の公開データ集</p></header>
+<nav class="bread"><a href="index.html">トップ</a> ＞ テーマ01 公共施設×人口</nav><main>
+<div class="card"><h2>テーマ01 公共施設×人口 <span class="badge">公開中</span></h2><p>国調 peak60,994人(2005年)→55,167人(2025年)。住基57,793人(R6年3月末)。</p></div><div class="card"><h2>グラフ・表：人口の長期推移</h2><canvas id="c0" class="chart"></canvas><table id="t0" class="data"></table><p class="src">出典：仮想街こさい統計書R6年版（国勢調査・住民基本台帳）・総務省住民基本台帳｜対象：仮想街こさい（22221）</p></div><script type="application/json" id="j0">{"census": {"source": "湖西市統計書R6年版・国勢調査(各年10月1日)", "unit": "人", "values": [["1955", 39617], ["1960", 41449], ["1965", 43652], ["1970", 46126], ["1975", 49999], ["1980", 54252], ["1985", 58212], ["1990", 59926], ["1995", 60714], ["2000", 60827], ["2005", 60994], ["2010", 60107], ["2015", 59789], ["2020", 57885], ["2025", 55167]]}, "jumin_march": {"source": "湖西市統計書R6年版・住民基本台帳(各年3月31日)", "unit": "人", "values": [["2020", 59560], ["2021", 58938], ["2022", 58551], ["2023", 58230], ["2024", 57793]]}, "jumin_yearend": {"note": "data-sanpo経由の総務省「住民基本台帳に基づく人口」二次情報", "source": "総務省住民基本台帳(data-sanpo経由)", "unit": "人", "values": [["2020", 59057], ["2021", 58643], ["2022", 58400], ["2023", 58079], ["2024", 57216], ["2025", 56667]]}, "municipality_code": "22221", "note": "合併(H22.3.23)以前は旧湖西市+旧新居町の合算値(統計書の再掲値を使用)"}</script></main><footer>仮想街こさい17テーマ公開データ（ローカル版）｜統計出典：e-Stat・地図出典：国土地理院・国土数値情報</footer>
+<script src="assets/chart.umd.min.js"></script>
+<script src="assets/leaflet.js"></script>
+<script src="assets/site.js"></script>
+<script>(function(){var d=JSON.parse(document.getElementById('j0').textContent);
+var rows=d.census.values;var lb=rows.map(function(r){return r[0]+'年'});var vs=rows.map(function(r){return r[1]});
+new Chart(document.getElementById('c0'),{type:'line',data:{labels:lb,datasets:[{label:'国勢調査人口（人）',data:vs,borderColor:'#1f6feb',backgroundColor:'rgba(31,111,235,.12)',fill:true,tension:.15}]},options:{responsive:true}});
+var h='<thead><tr><th>年</th><th>国調（人）</th></tr></thead><tbody>'+rows.map(function(r){return '<tr><td>'+r[0]+'</td><td>'+r[1].toLocaleString()+'</td>'}).join('')+'</tbody>';
+var yj=d.jumin_march.values.map(function(r){return r[0]+': '+r[1].toLocaleString()}).join('、');
+h+='<tr><td>住基3月末</td><td>'+yj+'</td></tr></tbody>';document.getElementById('t0').innerHTML=h;})();</script></body></html>
