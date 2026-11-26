@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>GIS避難所マップ｜仮想街おまえざき17テーマ</title>
+<link rel="stylesheet" href="assets/leaflet.css">
+<link rel="stylesheet" href="assets/style.css"></head>
+<body>
+<header class="top"><h1>仮想街おまえざき17テーマ</h1><p>静岡県仮想街おまえざき（自治体コード22223）の公開データ集</p></header>
+<nav class="bread"><a href="index.html">トップ</a> ＞ テーマ11 災害リスク ＞ GIS避難所マップ</nav><main>
+<div class="card"><h2>避難所マップ — 83か所・収容13,512人の配置を地図化</h2>
+<table class="data"><thead><tr><th>項目</th><th>値</th></tr></thead>
+<tbody>
+<tr><td>避難所数</td><td>83</td></tr>
+<tr><td>想定収容合計（人口の約47%）</td><td>13,512人</td></tr>
+<tr><td>最大：浜岡中学校 体育館</td><td>1,169人</td></tr>
+<tr><td>データ更新日</td><td>2024.10.16</td></tr>
+</tbody></table></div>
+<div class="card"><h2>地図：避難所の配置</h2>
+<div id="gismap" class="map"></div>
+<p class="src">赤＝避難所（円の大きさは収容人数）。青線＝市境界（OpenStreetMap）。クリックで名称・住所・収容人数。背景地図：国土地理院淡色地図（要インターネット）。</p></div>
+<div class="card"><h2>想定収容人数トップ10</h2>
+<table class="data"><thead><tr><th>名称</th><th>住所</th><th>収容人数</th></tr></thead>
+<tbody>
+<tr><td>浜岡中学校　体育館</td><td>静岡県御前崎市池新田3923-1</td><td>1,169人</td></tr>
+<tr><td>さくらこども園</td><td>静岡県御前崎市佐倉888-1</td><td>1,104人</td></tr>
+<tr><td>池新田高等学校　体育館</td><td>静岡県御前崎市池新田2907-1</td><td>1,003人</td></tr>
+<tr><td>御前崎地区センター</td><td>静岡県御前崎市白羽5401-1</td><td>903人</td></tr>
+<tr><td>はまおか幼稚園</td><td>静岡県御前崎市池新田5814</td><td>629人</td></tr>
+<tr><td>池新田地区センター</td><td>静岡県御前崎市池新田3262</td><td>498人</td></tr>
+<tr><td>佐倉地区センター</td><td>静岡県御前崎市佐倉3617-1</td><td>488人</td></tr>
+<tr><td>白羽小学校　体育館</td><td>静岡県御前崎市白羽3521-3</td><td>407人</td></tr>
+<tr><td>比木地区センター　体育館</td><td>静岡県御前崎市比木2836-5</td><td>378人</td></tr>
+<tr><td>御前崎小学校　体育館</td><td>静岡県御前崎市御前崎3556</td><td>378人</td></tr>
+</tbody></table>
+<p class="src">出典：ふじのくにオープンデータカタログ fuji-920「御前崎市内の避難所一覧」（2024.10.16版、CC BY）｜仮想街おまえざき域83件を抽出</p></div>
+<div class="card"><h2>読みどころ・限界</h2>
+<ul><li>学校体育館が上位を占める。収容の学校依存が高い</li><li>収容合計13,512人は人口28,832人の約47%。全員収容は想定外</li><li>津波・高潮・土砂のハザード別指定は原票の災害種別を参照</li><li>Web表示は簡素化版。分析にはraw相当の原票CSVを使用</li></ul></div>
+</main><footer>仮想街おまえざき17テーマ公開データ（ローカル版）｜<a href="../data.html">戻る</a><br>統計出典：e-Stat・地図出典：国土地理院・OpenStreetMap・ふじのくにオープンデータ</footer>
+<script src="assets/chart.umd.min.js"></script>
+<script src="assets/leaflet.js"></script>
+<script src="assets/site.js"></script>
+<script>
+(function(){
+"use strict";
+Promise.all([
+  fetch("data/boundary.geojson").then(function(r){return r.json();}),
+  fetch("data/shelters.json").then(function(r){return r.json();})
+]).then(function(res){
+var boundary=res[0];
+var shelters=res[1];
+var map=L.map("gismap").setView([34.62,138.16],11);
+L.tileLayer("https://cyberjapandata.gsi.go.jp/xyz/pale/{z}/{x}/{y}.png",{attribution:"国土地理院",maxZoom:18}).addTo(map);
+var base=L.geoJSON(boundary,{style:{color:"#1f6feb",weight:3,fillOpacity:.05}}).addTo(map);
+try{map.fitBounds(base.getBounds(),{padding:[20,20]});}catch(e){}
+shelters.forEach(function(s){
+  var r=4+Math.sqrt(s.cap)*0.35;
+  L.circleMarker([s.lat,s.lon],{radius:r,color:"#c0392b",fillOpacity:.6,weight:1})
+   .bindPopup("<b>"+s.name+"</b><br>"+s.addr+"<br>収容 "+s.cap.toLocaleString()+"人<br>"+s.tel).addTo(map);
+});
+L.control.scale({metric:true,imperial:false}).addTo(map);
+});})();
+</script>
+</body></html>
