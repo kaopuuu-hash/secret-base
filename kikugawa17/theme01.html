@@ -1,0 +1,17 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>テーマ01 公共施設×人口｜仮想街きくがわ17テーマ</title>
+<link rel="stylesheet" href="assets/leaflet.css">
+<link rel="stylesheet" href="assets/style.css"></head><body>
+<header class="top"><h1>仮想街きくがわ17テーマ</h1><p>静岡県仮想街きくがわ（自治体コード22224）の公開データ集</p></header>
+<nav class="bread"><a href="index.html">トップ</a> ＞ テーマ01 公共施設×人口</nav><main>
+<div class="card"><h2>テーマ01 公共施設×人口 <span class="badge">公開中</span></h2><p>国調 peak47,789人(2020年)→45,478人(2025年確定)。住基46,556人(R8年3月末)。</p></div><div class="card"><h2>グラフ・表：人口の長期推移</h2><canvas id="c0" class="chart"></canvas><table id="t0" class="data"></table><p class="src">出典：仮想街きくがわ公式サイト（国勢調査・住民基本台帳）｜対象：仮想街きくがわ（22224）</p></div><script type="application/json" id="j0">{"census": {"source": "菊川市公式サイト「国勢調査における人口の推移」(総務省国勢調査、各年10月1日現在、R7は2025年国勢調査確定値)", "unit": "人", "values": [[1980, 38081], [1985, 40783], [1990, 43762], [1995, 46334], [2000, 47036], [2005, 47502], [2010, 47041], [2015, 46763], [2020, 47789], [2025, 45478]]}, "jumin_march": {"source": "菊川市公式サイト「市の人口・世帯数(住民基本台帳)」各年3月31日現在", "unit": "人", "values": [[2021, 48066], [2022, 47720], [2023, 47582], [2024, 47450], [2025, 46961], [2026, 46556]]}, "jumin_yearend": {"source": "菊川市公式サイト 年齢別人口PDF(各年12月末現在)の合計欄より抽出", "unit": "人", "values": [[2020, 48290], [2021, 47880], [2022, 47738], [2023, 47541], [2024, 47179], [2025, 46698]]}, "municipality_code": "22224", "municipality_name": "菊川市", "note": "12月末値は一次資料PDFの合計欄(日本人+外国人)から取得。既知値:人口45187(2026-11推計)・面積94.19km2・中心緯度経度34.7578,138.0848。国勢調査R7確定値45478(2025-10-01、対R2比-4.8%)、住基R8.3月46556・R8.10月末46555と減少トレンドは整合。"}</script></main><footer>仮想街きくがわ17テーマ公開データ（ローカル版）｜統計出典：e-Stat・地図出典：国土地理院・国土数値情報</footer>
+<script src="assets/chart.umd.min.js"></script>
+<script src="assets/leaflet.js"></script>
+<script src="assets/site.js"></script>
+<script>(function(){var d=JSON.parse(document.getElementById('j0').textContent);
+var rows=d.census.values.slice();if(d.census_2025){rows.push(d.census_2025.value);}var lb=rows.map(function(r){return r[0]+'年'});var vs=rows.map(function(r){return r[1]});
+new Chart(document.getElementById('c0'),{type:'line',data:{labels:lb,datasets:[{label:'国勢調査人口（人）',data:vs,borderColor:'#1f6feb',backgroundColor:'rgba(31,111,235,.12)',fill:true,tension:.15}]},options:{responsive:true}});
+var h='<thead><tr><th>年</th><th>国調（人）</th></tr></thead><tbody>'+rows.map(function(r){return '<tr><td>'+r[0]+'</td><td>'+r[1].toLocaleString()+'</td>'}).join('')+'</tbody>';
+var yj=d.jumin_march.values.map(function(r){return r[0]+': '+r[1].toLocaleString()}).join('、');
+h+='<tr><td>住基3月末</td><td>'+yj+'</td></tr></tbody>';document.getElementById('t0').innerHTML=h;})();</script></body></html>
