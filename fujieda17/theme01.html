@@ -1,0 +1,17 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>テーマ01 公共施設×人口｜仮想街ふじえだ17テーマ</title>
+<link rel="stylesheet" href="assets/leaflet.css">
+<link rel="stylesheet" href="assets/style.css"></head><body>
+<header class="top"><h1>仮想街ふじえだ17テーマ</h1><p>静岡県仮想街ふじえだ（自治体コード22214）の公開データ集</p></header>
+<nav class="bread"><a href="index.html">トップ</a> ＞ テーマ01 公共施設×人口</nav><main>
+<div class="card"><h2>テーマ01 公共施設×人口 <span class="badge">公開中</span></h2><p>国調 peak143,605人(2015年)→141,342人(2020年)。住基139,290人(R7年3月末)。</p></div><div class="card"><h2>グラフ・表：人口の長期推移</h2><canvas id="c0" class="chart"></canvas><table id="t0" class="data"></table><p class="src">出典：仮想街ふじえだ公式サイト（国勢調査・住民基本台帳）｜対象：仮想街ふじえだ（22214）</p></div><script type="application/json" id="j0">{"census": {"source": "総務省統計局 国勢調査(確報値)。e-stat「都道府県・市区町村別の主な結果」系列。数値はLocal Opendata(22214)および日本医師会地域医療情報システム(JMAP)の掲載値で相互確認(2015年=143,605人、2020年=141,342人で一致)。一次資料はe-stat原本を参照のこと。", "unit": "人(各年10月1日現在)", "values": [[1980, 114822], [1985, 124717], [1990, 133147], [1995, 138388], [2000, 141643], [2005, 141944], [2010, 142151], [2015, 143605], [2020, 141342]]}, "jumin_march": {"source": "藤枝市公式サイト 月末人口(住民基本台帳人口・外国人含む)および藤枝市統計書令和5年版(総人口表・資料/総務課)。2021~2023年3月末は統計書掲載値と月末ページ値が一致することを確認済み。", "unit": "人(各年3月31日/3月末現在、外国人含む総人口)", "values": [[2021, 143765], [2022, 142955], [2023, 141857], [2024, 140365], [2025, 139290]]}, "jumin_yearend": {"source": "藤枝市公式サイト 月末人口(住民基本台帳人口・外国人含む、各年12月末ページの大字別人口「市全体 合計」計)", "unit": "人(各年12月末現在、外国人含む総人口)", "values": [[2020, 144096], [2021, 143580], [2022, 142387], [2023, 140979], [2024, 139870]]}, "municipality_code": "22214", "note": "既知値(人口132,982・2026-11推計=県推計人口、国勢調査ベース)との関係:住基人口(2025年3月末139,290人)より約6,300人少ない。推計人口は国勢調査を基礎に出生・死亡・転出入で積算する系列で、届出遅れ等を含む住民票登録数より低めに出るのが一般的傾向であり、方向性として矛盾しない。面積194.06km2・中心緯経度(34.8675,138.2578)は別管理の既知値。取得日:2026-11-25。"}</script></main><footer>仮想街ふじえだ17テーマ公開データ（ローカル版）｜統計出典：e-Stat・地図出典：国土地理院・国土数値情報</footer>
+<script src="assets/chart.umd.min.js"></script>
+<script src="assets/leaflet.js"></script>
+<script src="assets/site.js"></script>
+<script>(function(){var d=JSON.parse(document.getElementById('j0').textContent);
+var rows=d.census.values.slice();if(d.census_2025){rows.push(d.census_2025.value);}var lb=rows.map(function(r){return r[0]+'年'});var vs=rows.map(function(r){return r[1]});
+new Chart(document.getElementById('c0'),{type:'line',data:{labels:lb,datasets:[{label:'国勢調査人口（人）',data:vs,borderColor:'#1f6feb',backgroundColor:'rgba(31,111,235,.12)',fill:true,tension:.15}]},options:{responsive:true}});
+var h='<thead><tr><th>年</th><th>国調（人）</th></tr></thead><tbody>'+rows.map(function(r){return '<tr><td>'+r[0]+'</td><td>'+r[1].toLocaleString()+'</td>'}).join('')+'</tbody>';
+var yj=d.jumin_march.values.map(function(r){return r[0]+': '+r[1].toLocaleString()}).join('、');
+h+='<tr><td>住基3月末</td><td>'+yj+'</td></tr></tbody>';document.getElementById('t0').innerHTML=h;})();</script></body></html>
