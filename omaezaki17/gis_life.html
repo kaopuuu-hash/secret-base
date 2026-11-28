@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>GIS 生活マップ｜仮想街おまえざき17テーマ</title>
+<!-- Leaflet はサイト内蔵 assets を使用。内蔵JSONのため地点表示可。背景地図のみ要ネット。 -->
+<link rel="stylesheet" href="assets/leaflet.css">
+<link rel="stylesheet" href="assets/style.css">
+<style>
+.hero{background:linear-gradient(135deg,#1f6feb,#6a1b9a);color:#fff;border-radius:12px;padding:20px;margin-bottom:12px}
+.hero h2{margin:0 0 8px;font-size:1.3em}
+.kpis{display:flex;flex-wrap:wrap;gap:10px;margin-top:10px}
+.kpi{background:rgba(255,255,255,.15);border-radius:10px;padding:10px 14px;min-width:120px}
+.kpi b{display:block;font-size:1.5em}
+.kpi span{font-size:.8rem;opacity:.9}
+.map-tall{height:min(66vh,520px)}
+.btns{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0;}
+.btns button{font-size:14px;padding:8px 14px;border-radius:8px;border:1px solid #888;background:#fff;cursor:pointer;}
+.btns button.on{background:#1f6feb;color:#fff;border-color:#1f6feb;}
+.leaflet-popup-content{font-size:14px !important;}
+.gap-star{background:none;border:none;}
+.gap-star .star{position:relative;width:36px;height:36px;font-size:30px;line-height:34px;text-align:center;color:#c00000;text-shadow:0 0 3px #fff,0 0 3px #fff,0 0 3px #fff,1px 1px 3px rgba(0,0,0,.55);}
+.gap-star .star span{position:absolute;right:-3px;bottom:-3px;font-size:12px;font-weight:bold;line-height:1;color:#111;text-shadow:0 0 2px #fff,0 0 2px #fff,0 0 2px #fff,0 0 2px #fff,0 0 2px #fff;}
+</style>
+</head>
+<body>
+<header class="top"><h1>仮想街おまえざき17テーマ</h1><p>静岡県仮想街おまえざき（自治体コード22223）の公開データ集</p></header>
+<nav class="bread"><a href="index.html">トップ</a> ＞ <a href="theme09.html">テーマ09 生活空白地</a> ＞ GIS 生活マップ</nav>
+<main>
+<div class="hero"><h2>バス停85・自主運行バス0・お店24</h2>
+<div class="kpis">
+<div class="kpi"><b>85</b><span>バス停（P11）</span></div>
+<div class="kpi"><b>0</b><span>自主運行バス（うち0は1日5本以下）</span></div>
+<div class="kpi"><b>24</b><span>お店（スーパー7・コンビニ12・薬局5）</span></div>
+<div class="kpi"><b>24.7%</b><span>人口が両方から500m以上（概算）</span></div>
+</div></div>
+<div class="card"><h2>地図</h2>
+<div class="btns">
+<button id="bBus" class="on">バス停</button>
+<button id="bGtfs" class="on">自主運行バス</button>
+<button id="bShop" class="on">お店</button>
+<button id="bGap" class="on">500m以上代表12</button>
+<button id="bFull">全画面</button>
+</div>
+<div id="map" class="map map-tall"></div>
+<p class="src">青＝バス停、赤系＝自主運行バス（濃赤は1日5本以下）、茶＝お店、星印数字＝500m以上エリア代表12（人口順）。背景地図：OpenStreetMap。</p></div>
+<div class="card"><h2>500m以上エリア代表12スポット（人口順・直線概算）</h2>
+<table class="data"><thead><tr><th>#</th><th>緯度</th><th>経度</th><th>最寄りバス停</th><th>距離</th><th>最寄り店</th><th>距離</th></tr></thead><tbody>
+<tr><td>1</td><td>34.64409</td><td>138.10129</td><td>塩原</td><td>872m</td><td>なかはら薬局</td><td>1304m</td></tr>
+<tr><td>2</td><td>34.66978</td><td>138.13853</td><td>浜岡総合運動場前</td><td>2004m</td><td>ローソン</td><td>2019m</td></tr>
+<tr><td>3</td><td>34.65855</td><td>138.10581</td><td>塩原</td><td>882m</td><td>なかはら薬局</td><td>1090m</td></tr>
+<tr><td>4</td><td>34.64968</td><td>138.08644</td><td>合戸東</td><td>545m</td><td>なかはら薬局</td><td>2428m</td></tr>
+<tr><td>5</td><td>34.68382</td><td>138.15704</td><td>大向原</td><td>938m</td><td>セブンイレブン 御前崎比木店</td><td>3821m</td></tr>
+<tr><td>6</td><td>34.60675</td><td>138.22814</td><td>港入口</td><td>854m</td><td>セブンイレブン 御前崎港店</td><td>533m</td></tr>
+<tr><td>7</td><td>34.65863</td><td>138.17066</td><td>勝佐</td><td>1119m</td><td>セブンイレブン 御前崎比木店</td><td>1802m</td></tr>
+<tr><td>8</td><td>34.67493</td><td>138.12918</td><td>新野</td><td>1266m</td><td>ローソン</td><td>2413m</td></tr>
+<tr><td>9</td><td>34.67666</td><td>138.15554</td><td>大向原</td><td>1726m</td><td>セブンイレブン 御前崎比木店</td><td>3020m</td></tr>
+<tr><td>10</td><td>34.68750</td><td>138.12716</td><td>新野</td><td>2017m</td><td>ローソン</td><td>3813m</td></tr>
+<tr><td>11</td><td>34.64191</td><td>138.15500</td><td>浜岡東小学校前</td><td>676m</td><td>セブンイレブン 御前崎比木店</td><td>840m</td></tr>
+<tr><td>12</td><td>34.64234</td><td>138.11034</td><td>御前崎総合病院</td><td>808m</td><td>なかはら薬局</td><td>966m</td></tr>
+</tbody></table>
+<p class="src">39小地域のうち13セルが両方から500m以上。人口加重では24.7%。直線距離・小地域内均等分布仮定のため概算。</p></div>
+<div class="card"><h2>時刻表</h2>
+<p><a href="https://opendata.pref.shizuoka.jp/dataset/fuji-918.html">仮想街おまえざき自主運行バス時刻表（静岡県オープンデータカタログ・xlsx）</a>｜<a href="https://www.city.omaezaki.shizuoka.jp/soshiki/kikakuseisaku/koutsu/koukyoukoutuu/11372.html">市公式・自主運行バス</a></p>
+<p class="src">GTFS-JP未公開のため地図上のバス表示はP11バス停。自主運行2路線の時刻は上記を参照。</p></div>
+<div class="card"><h2>出典</h2>
+<p class="src">バス停位置：国土数値情報P11 2022年度静岡版（85件抽出：仮想街おまえざき 42・御前崎市・牧之原市 25・しずてつジャストライン（株） 16・牧之原市 2）。自主運行バス：GTFS-JP未公開（県OD fuji-918はxlsx時刻表のみ）。（GTFS-JP未公開のため地図上はP11バス停で代替。時刻表は県OD fuji-918のxlsx（相良浜岡線・相良御前崎線）および市公式ページ参照）。お店：OSM 0件（境界内抽出、収集24件）。人口：令和2年国勢調査小地域（45件、JINKO計39一致）。境界：国土数値情報行政区域。背景地図：OpenStreetMap。</p></div>
+</main>
+<footer>仮想街おまえざき17テーマ公開データ（ローカル版）｜統計出典：e-Stat・地図出典：国土地理院・国土数値情報</footer>
+<script src="assets/leaflet.js"></script>
+<script type="application/json" id="j-bus">[{"n": "河原崎商事前", "o": "牧之原市", "s": "牧之原市自主運行バス　鬼女・菅山線", "lo": 138.15387251, "la": 34.69381624}, {"n": "大向原", "o": "牧之原市", "s": "牧之原市自主運行バス　鬼女・菅山線", "lo": 138.16160792, "la": 34.69139276}, {"n": "新野", "o": "しずてつジャストライン（株）", "s": "菊川浜岡線", "lo": 138.11575202, "la": 34.67191928}, {"n": "木ヶ谷", "o": "しずてつジャストライン（株）", "s": "菊川浜岡線", "lo": 138.11655825, "la": 34.66663192}, {"n": "合戸", "o": "しずてつジャストライン（株）", "s": "掛川大東浜岡線", "lo": 138.08457428, "la": 34.65704972}, {"n": "浜岡総合運動場前", "o": "しずてつジャストライン（株）", "s": "菊川浜岡線", "lo": 138.12671522, "la": 34.65454502}, {"n": "合戸東", "o": "しずてつジャストライン（株）", "s": "掛川大東浜岡線", "lo": 138.08940255, "la": 34.65394831}, {"n": "高松（浜岡）", "o": "しずてつジャストライン（株）", "s": "掛川大東浜岡線", "lo": 138.09615231, "la": 34.65153213}, {"n": "苗代田", "o": "しずてつジャストライン（株）", "s": "菊川浜岡線", "lo": 138.12872903, "la": 34.6510053}, {"n": "ぷるる", "o": "御前崎市", "s": "御前崎市内線　比木周り", "lo": 138.14064043, "la": 34.65086217}, {"n": "第一小学校前", "o": "御前崎市", "s": "御前崎市内線　桜ヶ池回り", "lo": 138.12052511, "la": 34.65073622}, {"n": "第一小学校前（自主）", "o": "しずてつジャストライン（株）", "s": "掛川大東浜岡線", "lo": 138.12052511, "la": 34.65073622}, {"n": "第一小学校前", "o": "御前崎市・牧之原市", "s": "相良浜岡線", "lo": 138.12052511, "la": 34.65073622}, {"n": "蒲池", "o": "しずてつジャストライン（株）", "s": "掛川大東浜岡線", "lo": 138.11362827, "la": 34.65068132}, {"n": "塩原", "o": "しずてつジャストライン（株）", "s": "掛川大東浜岡線", "lo": 138.10662891, "la": 34.65062531}, {"n": "JA高松支店", "o": "しずてつジャストライン（株）", "s": "掛川大東浜岡線", "lo": 138.10916203, "la": 34.65050512}, {"n": "勝佐", "o": "御前崎市", "s": "御前崎市内線　比木周り", "lo": 138.16384951, "la": 34.65022819}, {"n": "やぐち橋", "o": "御前崎市", "s": "御前崎市内線　比木周り", "lo": 138.15992996, "la": 34.64988525}, {"n": "中田", "o": "御前崎市", "s": "御前崎市内線　比木周り", "lo": 138.15372672, "la": 34.64945036}, {"n": "緑町", "o": "御前崎市", "s": "御前崎市内線　桜ヶ池回り", "lo": 138.12642211, "la": 34.64863499}, {"n": "緑町（自主）", "o": "しずてつジャストライン（株）", "s": "掛川大東浜岡線", "lo": 138.12642211, "la": 34.64863499}, {"n": "緑町", "o": "御前崎市・牧之原市", "s": "相良浜岡線", "lo": 138.12642211, "la": 34.64863499}, {"n": "浜岡", "o": "御前崎市", "s": "御前崎市内線　桜ヶ池回り", "lo": 138.12824701, "la": 34.64599399}, {"n": "浜岡", "o": "しずてつジャストライン（株）", "s": "菊川浜岡線;掛川大東浜岡線", "lo": 138.12824701, "la": 34.64599399}, {"n": "浜岡", "o": "御前崎市・牧之原市", "s": "相良浜岡線", "lo": 138.12824701, "la": 34.64599399}, {"n": "東町公民館前", "o": "御前崎市", "s": "御前崎市内線　比木周り", "lo": 138.13409284, "la": 34.64535784}, {"n": "御前崎総合病院", "o": "御前崎市", "s": "御前崎市内線　桜ヶ池回り;御前崎市内線　比木周り", "lo": 138.11857021, "la": 34.64508885}, {"n": "御前崎総合病院", "o": "御前崎市・牧之原市", "s": "相良浜岡線", "lo": 138.11857021, "la": 34.64508885}, {"n": "名波", "o": "御前崎市", "s": "御前崎市内線　比木周り", "lo": 138.16317999, "la": 34.64504375}, {"n": "JA池新田支店", "o": "御前崎市", "s": "御前崎市内線　比木周り", "lo": 138.12714077, "la": 34.64501798}, {"n": "浜岡中学校前", "o": "御前崎市", "s": "御前崎市内線　桜ヶ池回り;御前崎市内線　比木周り", "lo": 138.12793325, "la": 34.64345095}, {"n": "浜岡中学校前（自主）", "o": "しずてつジャストライン（株）", "s": "菊川浜岡線;掛川大東浜岡線", "lo": 138.12793325, "la": 34.64345095}, {"n": "浜岡中学校前", "o": "御前崎市・牧之原市", "s": "相良浜岡線", "lo": 138.12793325, "la": 34.64345095}, {"n": "浜岡営業所", "o": "御前崎市", "s": "御前崎市内線　桜ヶ池回り;御前崎市内線　比木周り", "lo": 138.12747952, "la": 34.64055237}, {"n": "浜岡営業所", "o": "しずてつジャストライン（株）", "s": "菊川浜岡線;掛川大東浜岡線", "lo": 138.12747952, "la": 34.64055237}, {"n": "浜岡営業所（特急）", "o": "しずてつジャストライン（株）", "s": "特急静岡相良線", "lo": 138.12747952, "la": 34.64055237}, {"n": "浜岡営業所", "o": "御前崎市・牧之原市", "s": "相良浜岡線", "lo": 138.12747952, "la": 34.64055237}, {"n": "東町南", "o": "御前崎市", "s": "御前崎市内線　比木周り", "lo": 138.13296655, "la": 34.63926542}, {"n": "御前崎市役所前", "o": "御前崎市", "s": "御前崎市内線　桜ヶ池回り;御前崎市内線　比木周り", "lo": 138.12869449, "la": 34.6384693}, {"n": "御前崎市役所前", "o": "御前崎市・牧之原市", "s": "相良浜岡線", "lo": 138.12869449, "la": 34.6384693}, {"n": "マックス・バリュ", "o": "御前崎市", "s": "御前崎市内線　桜ヶ池回り", "lo": 138.13417179, "la": 34.63747009}, {"n": "マックス・バリュ", "o": "御前崎市・牧之原市", "s": "相良浜岡線", "lo": 138.13417179, "la": 34.63747009}, {"n": "浜岡東小学校前", "o": "御前崎市", "s": "御前崎市内線　比木周り", "lo": 138.15756832, "la": 34.63619308}, {"n": "桜ケ池南", "o": "御前崎市", "s": "御前崎市内線　桜ヶ池回り", "lo": 138.14084255, "la": 34.63587778}, {"n": "桜ヶ池南", "o": "御前崎市・牧之原市", "s": "相良浜岡線", "lo": 138.14084255, "la": 34.63587778}, {"n": "桜ケ池", "o": "御前崎市", "s": "御前崎市内線　桜ヶ池回り", "lo": 138.14235351, "la": 34.63575703}, {"n": "桜ヶ池", "o": "御前崎市・牧之原市", "s": "相良浜岡線", "lo": 138.14235351, "la": 34.63575703}, {"n": "原子力発電所入口", "o": "御前崎市", "s": "御前崎市内線　桜ヶ池回り", "lo": 138.14890931, "la": 34.63365591}, {"n": "原子力発電所入口", "o": "御前崎市・牧之原市", "s": "相良浜岡線", "lo": 138.14890931, "la": 34.63365591}, {"n": "雨垂", "o": "御前崎市", "s": "御前崎市内線　桜ヶ池回り", "lo": 138.15603309, "la": 34.63198026}, {"n": "雨垂", "o": "御前崎市・牧之原市", "s": "相良浜岡線", "lo": 138.15603309, "la": 34.63198026}, {"n": "法の沢", "o": "御前崎市", "s": "御前崎市内線　桜ヶ池回り", "lo": 138.15969272, "la": 34.63175846}, {"n": "法の沢", "o": "御前崎市・牧之原市", "s": "相良浜岡線", "lo": 138.15969272, "la": 34.63175846}, {"n": "玄保", "o": "御前崎市", "s": "御前崎市内線　桜ヶ池回り", "lo": 138.16443633, "la": 34.63159758}, {"n": "玄保", "o": "御前崎市・牧之原市", "s": "相良浜岡線", "lo": 138.16443633, "la": 34.63159758}, {"n": "東玄保", "o": "御前崎市・牧之原市", "s": "相良浜岡線", "lo": 138.16966824, "la": 34.63036959}, {"n": "佐倉駐在所前", "o": "御前崎市", "s": "御前崎市内線　比木周り", "lo": 138.15757858, "la": 34.62945343}, {"n": "南玄保", "o": "御前崎市", "s": "御前崎市内線　桜ヶ池回り", "lo": 138.16461278, "la": 34.62917483}, {"n": "洗井", "o": "御前崎市", "s": "御前崎市内線　桜ヶ池回り", "lo": 138.16363527, "la": 34.62415739}, {"n": "緑橋", "o": "御前崎市", "s": "御前崎市内線　桜ヶ池回り;御前崎市内線　比木周り", "lo": 138.16586291, "la": 34.62101014}, {"n": "神子新田", "o": "御前崎市", "s": "御前崎市内線　桜ヶ池回り;御前崎市内線　比木周り", "lo": 138.16694285, "la": 34.61930907}, {"n": "北新谷", "o": "御前崎市・牧之原市", "s": "相良御前崎線", "lo": 138.20182388, "la": 34.61666821}, {"n": "新神子", "o": "御前崎市", "s": "御前崎市内線　桜ヶ池回り;御前崎市内線　比木周り", "lo": 138.17310064, "la": 34.61636318}, {"n": "白浜下", "o": "御前崎市", "s": "御前崎市内線　桜ヶ池回り;御前崎市内線　比木周り", "lo": 138.17903113, "la": 34.61490935}, {"n": "増船寺入口", "o": "御前崎市", "s": "御前崎市内線　桜ヶ池回り;御前崎市内線　比木周り", "lo": 138.18128119, "la": 34.61400202}, {"n": "新谷", "o": "御前崎市・牧之原市", "s": "相良御前崎線", "lo": 138.2015285, "la": 34.61342798}, {"n": "中西", "o": "御前崎市", "s": "御前崎市内線　桜ヶ池回り;御前崎市内線　比木周り", "lo": 138.18390622, "la": 34.61277168}, {"n": "白羽小学校前", "o": "御前崎市", "s": "御前崎市内線　桜ヶ池回り;御前崎市内線　比木周り", "lo": 138.19023549, "la": 34.61133609}, {"n": "すすき原", "o": "御前崎市・牧之原市", "s": "相良御前崎線", "lo": 138.20256408, "la": 34.61076144}, {"n": "中原", "o": "御前崎市", "s": "御前崎市内線　桜ヶ池回り;御前崎市内線　比木周り", "lo": 138.19559822, "la": 34.61022474}, {"n": "御前崎支所前", "o": "御前崎市", "s": "御前崎市内線　桜ヶ池回り;御前崎市内線　比木周り", "lo": 138.20543713, "la": 34.61021608}, {"n": "御前崎支所前", "o": "御前崎市・牧之原市", "s": "相良御前崎線", "lo": 138.20543713, "la": 34.61021608}, {"n": "新谷入口", "o": "御前崎市", "s": "御前崎市内線　桜ヶ池回り;御前崎市内線　比木周り", "lo": 138.20017634, "la": 34.60994709}, {"n": "女岩入口", "o": "御前崎市", "s": "御前崎市内線　桜ヶ池回り;御前崎市内線　比木周り", "lo": 138.21082307, "la": 34.60816024}, {"n": "女岩入口", "o": "御前崎市・牧之原市", "s": "相良御前崎線", "lo": 138.21082307, "la": 34.60816024}, {"n": "西側", "o": "御前崎市", "s": "御前崎市内線　桜ヶ池回り;御前崎市内線　比木周り", "lo": 138.21314155, "la": 34.60615143}, {"n": "西側", "o": "御前崎市・牧之原市", "s": "相良御前崎線", "lo": 138.21314155, "la": 34.60615143}, {"n": "御前崎小学校前", "o": "御前崎市", "s": "御前崎市内線　桜ヶ池回り;御前崎市内線　比木周り", "lo": 138.21563026, "la": 34.60395782}, {"n": "御前崎小学校前", "o": "御前崎市・牧之原市", "s": "相良御前崎線", "lo": 138.21563026, "la": 34.60395782}, {"n": "大山", "o": "御前崎市", "s": "御前崎市内線　桜ヶ池回り;御前崎市内線　比木周り", "lo": 138.21742536, "la": 34.6031248}, {"n": "大山", "o": "御前崎市・牧之原市", "s": "相良御前崎線", "lo": 138.21742536, "la": 34.6031248}, {"n": "港入口", "o": "御前崎市", "s": "御前崎市内線　桜ヶ池回り;御前崎市内線　比木周り", "lo": 138.22053836, "la": 34.60222591}, {"n": "港入口", "o": "御前崎市・牧之原市", "s": "相良御前崎線", "lo": 138.22053836, "la": 34.60222591}, {"n": "御前崎海洋センター", "o": "御前崎市", "s": "御前崎市内線　桜ヶ池回り;御前崎市内線　比木周り", "lo": 138.22227687, "la": 34.60007777}, {"n": "御前崎海洋センター", "o": "御前崎市・牧之原市", "s": "相良御前崎線", "lo": 138.22227687, "la": 34.60007777}]</script>
+<script type="application/json" id="j-shop">[{"n": "ファミリーマート 御前崎店", "k": "convenience", "lo": 138.2158032, "la": 34.6036386}, {"n": "ACoop", "k": "supermarket", "lo": 138.2147629, "la": 34.6040227}, {"n": "Cainz mall", "k": "supermarket", "lo": 138.1590635, "la": 34.6248165}, {"n": "セブン-イレブン 御前崎浜岡店", "k": "convenience", "lo": 138.1326755, "la": 34.6346512}, {"n": "セイジョー", "k": "pharmacy", "lo": 138.1332642, "la": 34.6424702}, {"n": "セブンイレブン 御前崎池新田店", "k": "convenience", "lo": 138.1308048, "la": 34.644051}, {"n": "ローソン", "k": "convenience", "lo": 138.1294166, "la": 34.6531941}, {"n": "セブンイレブン 御前崎白羽店", "k": "convenience", "lo": 138.2029532, "la": 34.6102051}, {"n": "セブンイレブン 御前崎港店", "k": "convenience", "lo": 138.2229432, "la": 34.6045363}, {"n": "ファミリーマート 御前崎佐倉店", "k": "convenience", "lo": 138.1404731, "la": 34.6318683}, {"n": "業務スーパー御前崎店", "k": "supermarket", "lo": 138.1281549, "la": 34.6418909}, {"n": "セブン‐イレブン 御前崎池新田大山店", "k": "convenience", "lo": 138.1239078, "la": 34.6458003}, {"n": "白羽薬局", "k": "pharmacy", "lo": 138.2016573, "la": 34.6106155}, {"n": "ファミリーマート", "k": "convenience", "lo": 138.1185003, "la": 34.6515912}, {"n": "セブンイレブン 御前崎比木店", "k": "convenience", "lo": 138.1543197, "la": 34.6494631}, {"n": "セブン-イレブン", "k": "convenience", "lo": 138.1582029, "la": 34.6320266}, {"n": "ベイシア", "k": "supermarket", "lo": 138.1584995, "la": 34.6253417}, {"n": "なかはら薬局", "k": "pharmacy", "lo": 138.1131005, "la": 34.6507463}, {"n": "マックスバリュ浜岡店", "k": "supermarket", "lo": 138.1344613, "la": 34.6367714}, {"n": "名称不明", "k": "supermarket", "lo": 138.1330529, "la": 34.6425055}, {"n": "ウエルシア御前崎池新田店", "k": "pharmacy", "lo": 138.1269054, "la": 34.6446797}, {"n": "杏林堂薬局 浜岡店", "k": "pharmacy", "lo": 138.1306447, "la": 34.6356551}, {"n": "ローソン 御前崎浜岡店", "k": "convenience", "lo": 138.1307896, "la": 34.6343278}, {"n": "スーパーラック浜岡店", "k": "supermarket", "lo": 138.1649024, "la": 34.623078}]</script>
+<script type="application/json" id="j-gtfs">[]</script>
+<script type="application/json" id="j-gap">[{"lat": 34.64409, "lon": 138.10129, "bus_m": 872, "bus": "塩原", "shop_m": 1304, "shop": "なかはら薬局", "pop": 1370}, {"lat": 34.66978, "lon": 138.13853, "bus_m": 2004, "bus": "浜岡総合運動場前", "shop_m": 2019, "shop": "ローソン", "pop": 909}, {"lat": 34.65855, "lon": 138.10581, "bus_m": 882, "bus": "塩原", "shop_m": 1090, "shop": "なかはら薬局", "pop": 779}, {"lat": 34.64968, "lon": 138.08644, "bus_m": 545, "bus": "合戸東", "shop_m": 2428, "shop": "なかはら薬局", "pop": 705}, {"lat": 34.68382, "lon": 138.15704, "bus_m": 938, "bus": "大向原", "shop_m": 3821, "shop": "セブンイレブン 御前崎比木店", "pop": 579}, {"lat": 34.60675, "lon": 138.22814, "bus_m": 854, "bus": "港入口", "shop_m": 533, "shop": "セブンイレブン 御前崎港店", "pop": 562}, {"lat": 34.65863, "lon": 138.17066, "bus_m": 1119, "bus": "勝佐", "shop_m": 1802, "shop": "セブンイレブン 御前崎比木店", "pop": 504}, {"lat": 34.67493, "lon": 138.12918, "bus_m": 1266, "bus": "新野", "shop_m": 2413, "shop": "ローソン", "pop": 473}, {"lat": 34.67666, "lon": 138.15554, "bus_m": 1726, "bus": "大向原", "shop_m": 3020, "shop": "セブンイレブン 御前崎比木店", "pop": 461}, {"lat": 34.6875, "lon": 138.12716, "bus_m": 2017, "bus": "新野", "shop_m": 3813, "shop": "ローソン", "pop": 455}, {"lat": 34.64191, "lon": 138.155, "bus_m": 676, "bus": "浜岡東小学校前", "shop_m": 840, "shop": "セブンイレブン 御前崎比木店", "pop": 350}, {"lat": 34.64234, "lon": 138.11034, "bus_m": 808, "bus": "御前崎総合病院", "shop_m": 966, "shop": "なかはら薬局", "pop": 289}]</script>
+<script>
+(function(){
+var bus=JSON.parse(document.getElementById('j-bus').textContent);
+var shops=JSON.parse(document.getElementById('j-shop').textContent);
+var gtfs=JSON.parse(document.getElementById('j-gtfs').textContent);
+var gap=JSON.parse(document.getElementById('j-gap').textContent);
+var map=L.map('map').setView([34.638,138.128],12);
+L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:18,attribution:'&copy; OpenStreetMap'}).addTo(map);
+function freqColor(w){ if(w<=5) return '#C0392B'; if(w<=9) return '#E67E22'; return '#1a5fb4'; }
+var gBus=L.layerGroup(), gGtfs=L.layerGroup(), gShop=L.layerGroup(), gGap=L.layerGroup();
+bus.forEach(function(p){ L.circleMarker([p.la,p.lo],{radius:3,color:'#1a5fb4',fillColor:'#1a5fb4',fillOpacity:.8,weight:1}).bindPopup('<b>'+p.n+'</b><br>'+p.o+'<br>'+p.s).addTo(gBus); });
+gtfs.forEach(function(p){ var c=freqColor(p.w); L.circleMarker([p.la,p.lo],{radius:4,color:c,fillColor:c,fillOpacity:.85,weight:1}).bindPopup('<b>'+p.n+'</b><br>平日'+p.w+'本（'+p.wf+'〜'+p.wl+'）<br>休日'+p.h+'本').addTo(gGtfs); });
+shops.forEach(function(p){ var l=p.k==='supermarket'?'スーパー':(p.k==='convenience'?'コンビニ':'薬局'); L.circleMarker([p.la,p.lo],{radius:4,color:'#8D5A2B',fillColor:'#F5C16C',fillOpacity:.9,weight:1}).bindPopup('<b>'+p.n+'</b><br>'+l).addTo(gShop); });
+gap.forEach(function(p,i){ L.marker([p.lat,p.lon],{icon:L.divIcon({className:'gap-star', html:'<div class="star">★<span>'+(i+1)+'</span></div>', iconSize:[36,36], iconAnchor:[18,18]})}).bindPopup('#'+(i+1)+' バス'+p.bus_m+'m（'+p.bus+'）<br>店'+p.shop_m+'m（'+p.shop+'）').addTo(gGap); });
+gBus.addTo(map); gGtfs.addTo(map); gShop.addTo(map); gGap.addTo(map);
+function tog(id,layer){ var b=document.getElementById(id); b.onclick=function(){ if(map.hasLayer(layer)){map.removeLayer(layer);b.classList.remove('on');} else {map.addLayer(layer);b.classList.add('on');} }; }
+tog('bBus',gBus); tog('bGtfs',gGtfs); tog('bShop',gShop); tog('bGap',gGap);
+var fs=document.getElementById('bFull');
+if(fs){ fs.onclick=function(){ var el=document.getElementById('map'); if(document.fullscreenElement){document.exitFullscreen();} else if(el.requestFullscreen){el.requestFullscreen();} }; document.addEventListener('fullscreenchange',function(){ setTimeout(function(){map.invalidateSize();},300); }); }
+})();
+</script>
+</body></html>
