@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="ja"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>仮想街いわた あとつぎマップ（500mメッシュ）</title>
+<meta name="description" content="仮想街いわたの500m四方ごとの「あとつぎ」マップ。公開されている統計だけを使っています。">
+<style>
+:root{
+  --bg-color:#000033;
+  --panel-bg:#c0c0c0;
+  --window-title-bg:navy;
+  --window-title-color:#ffffff;
+  --text-color:#000000;
+  --link-color:#0000ee;
+  --visited-color:#551a8b;
+  --hover-bg:#ffff00;
+  --border-light:#ffffff;
+  --border-dark:#808080;
+  --border-shadow:#404040;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  color:var(--text-color);
+  background-color:var(--bg-color);
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 20 20'><rect width='20' height='20' fill='%23000033'/><circle cx='2' cy='2' r='1' fill='%23ffffff'/><circle cx='12' cy='15' r='0.8' fill='%238888aa'/></svg>");
+  font-family:"MS P Gothic","ＭＳ Ｐゴシック",Osaka,Arial,sans-serif;
+  font-size:15px;
+  line-height:1.5;
+}
+a{color:var(--link-color);text-decoration:underline}
+a:visited{color:var(--visited-color)}
+a:hover{color:#ff0000;background-color:var(--hover-bg)}
+.site-shell{
+  max-width:980px;
+  margin:12px auto;
+  padding:8px;
+  background-color:#000066;
+  border:4px ridge #ffffff;
+}
+.site-header{
+  background:#ffffff;
+  border:3px inset #808080;
+  padding:14px;
+  margin-bottom:12px;
+}
+.sparkles{
+  text-align:center;
+  color:#cc00cc;
+  font-weight:bold;
+  letter-spacing:0.15em;
+  font-size:0.95rem;
+}
+h1{font-size:1.3rem;margin:6px 0 4px;color:#000080}
+.sub{font-size:12px;color:#333333;margin:0 0 8px}
+main{display:grid;grid-template-columns:7fr 3fr;gap:10px;align-items:start}
+.panel{
+  background-color:var(--panel-bg);
+  border:3px outset var(--border-light);
+  box-shadow:2px 2px 0px var(--border-shadow);
+  padding:10px;
+  margin-bottom:10px;
+}
+.panel h2{
+  margin:-10px -10px 10px -10px;
+  padding:6px 10px;
+  background:var(--window-title-bg);
+  color:var(--window-title-color);
+  font-size:1.05rem;
+  border-bottom:2px solid var(--border-dark);
+}
+canvas{width:100%;height:auto;display:block;border:2px inset #808080;background:#fff}
+.info{font-size:12px;color:#333333;margin-top:6px}
+.qbtn{
+  display:block;width:100%;margin:4px 0;padding:7px 9px;
+  background-color:var(--panel-bg);
+  border:3px outset var(--border-light);
+  box-shadow:1px 1px 0px var(--border-shadow);
+  cursor:pointer;font-size:13px;text-align:left;font-family:inherit;
+}
+.qbtn:active{border-style:inset}
+.qbtn.active{border-style:inset;background:#d4d4d4}
+.qbtn .row{display:flex;align-items:center;gap:8px}
+.qbtn .rule{font-size:11px;color:#444444;margin-top:3px}
+.dot{width:14px;height:14px;flex:none;border:1px solid #404040}
+table{width:100%;border-collapse:collapse;font-size:12px;margin-top:8px;background:#ffffff}
+th,td{border:1px solid #808080;padding:5px 6px;text-align:left}
+th{background:#000080;color:#ffffff}
+hr{border:none;border-top:2px groove #ffffff;margin:10px 0}
+.gauge{letter-spacing:2px;font-size:13px}
+.detail{background:#ffffff;border:2px inset #808080;padding:8px;font-size:13px;min-height:120px}
+.hint{font-size:11px;color:#555555}
+.gov{font-size:11px;color:#000000;background:#e8e8e8;border:2px groove #ffffff;padding:8px;margin-top:10px}
+.prof{font-size:11px;color:#333333;margin-top:8px}
+.trial{display:inline-block;font-size:12px;background:#ffff00;border:2px outset #ffffff;padding:2px 8px;margin-left:8px;vertical-align:middle;font-weight:bold}
+.banner{font-size:12px;background:#ffffe0;border:1px dashed #ff0000;padding:8px 10px;margin:0 0 8px}
+.hzlabel{font-size:12px;display:block;margin:0}
+.site-footer{
+  text-align:center;
+  background:#ffffff;
+  border:3px inset #808080;
+  padding:10px;
+  margin-top:12px;
+  font-size:0.85rem;
+}
+.site-footer p{margin:4px 0}
+.tiny{font-size:0.75rem;color:#666666}
+@media(max-width:860px){main{grid-template-columns:1fr}}
+</style></head><body id="top">
+<div class="site-shell">
+<header class="site-header">
+<div class="sparkles" aria-hidden="true">★☆★ 管理人の秘密基地 ・ ひみつラボ ★☆★</div>
+<h1>仮想街いわた あとつぎマップ（500mメッシュ）<span class="trial" id="modebadge">確定版</span></h1>
+<p class="sub">会社やお店の「あとつぎ」と、まちの様子を500m四方ごとに色で分けた地図です。4つの目安（高齢化の進み具合・事業所の集まり具合・土地の使われ方・災害の危なさ）を0〜3の4段階に丸めて判定しています [INFERRED]。グレー=データがないエリア（UNSPECIFIED: 数字が足りない・公表されていない） [CONFIRMED]。個人の情報や、個別の建物の情報は入っていません。外部のサーバーとの通信はしません。</p>
+<div class="banner" id="modebanner-text">読込中…</div>
+<label class="hzlabel"><input type="checkbox" id="hzpri"> 災害に気をつけるエリアを優先表示（災害の危なさ rank2以上を紫に）</label>
+</header>
+<main>
+<section class="panel">
+<h2>◆ 地図 ◆</h2>
+<canvas id="m" width="700" height="460"></canvas>
+<div id="info" class="info"></div>
+</section>
+<aside class="panel">
+<h2>◆ 色の意味と詳細 ◆</h2>
+<div><strong>色で絞り込む（もう一度押すと解除）</strong></div>
+<div id="filters"></div>
+<table id="summary"><tr><th>色の名前</th><th>マスの数</th><th>割合</th></tr></table>
+<hr>
+<div><strong>マスの詳細</strong> <span class="hint">（地図のマスをクリック。何もない所をクリックか Esc で解除）</span></div>
+<div id="detail" class="detail">地図のマスを選んでください。</div>
+<div class="prof" id="profinfo"></div>
+<div class="gov">このページについて: 使っているのは、公開された統計を丸めた数字だけです。個人の情報、個別の建物や土地の登記、お客さんのデータ、空き家の正確なリアルタイム情報は、入っていません・使いません [CONFIRMED]。設定ファイル（プロファイル）を替えれば、ほかの仕事の種類や、ほかの地域にも同じ仕組みを使えます（表示だけで完結する仕組み） [INFERRED]。</div>
+</aside>
+</main>
+<footer class="site-footer">
+<p><a href="../index.html">◀ ラボのトップへもどる</a></p>
+<p class="tiny">管理人の秘密基地 ・ Open Data Experimental Lab</p>
+</footer>
+</div>
+<script>
+// 汎用エンジン: 表示定義は profile_iwata.json が正本。内蔵値は取得失敗時の代替 [INFERRED]
+// 全DOM組立は textContent ベース（静的自作GeoJSONのみを描画し外部入力なしのため安全）
+const FALLBACK={colors:{red:"#C81E1E",yellow:"#D97706",purple:"#6D28D9",green:"#15803D",gray:"#CBD5E1"},
+ labels:{red:"赤:あとつぎが心配なエリア",yellow:"黄:事業が育ちやすいエリア",purple:"紫:災害に気をつけるエリア",green:"緑:安定・成長エリア",gray:"グレー:データがないエリア（UNSPECIFIED）"},
+ rules:{red:"hazard<=1 かつ aging>=2 かつ business>=2 かつ land_use>=1",yellow:"hazard<=1 かつ business>=2 かつ red条件に非該当",purple:"hazard>=2（災害優先）",green:"hazard<=1 かつ上記非該当",gray:"どれかの数字が足りない・公表されていない(*)"}};
+let COL=Object.assign({},FALLBACK.colors), LABEL=Object.assign({},FALLBACK.labels), RULE=Object.assign({},FALLBACK.rules);
+const ACT={red:"目安: 早めにあとつぎの話し合いを始める",yellow:"目安: 事業の値打ちを見える形にして、育てていく",purple:"目安: 災害の想定を確認して、場所を分ける・備えを優先する",green:"目安: ときどき様子を見て、成長を応援する",gray:"目安: データがそろってから、もう一度判定する（UNSPECIFIED）"};
+const ORDER=["red","yellow","purple","green","gray"];
+const KEYS=["aging_pressure","business_density","land_use_grid","hazard_exposure"];
+const JALABEL={aging_pressure:"高齢化の進み具合",business_density:"事業所の集まり具合",land_use_grid:"土地の使われ方",hazard_exposure:"災害の危なさ"};
+let FC=null, FILTER=null, HOVER=null;
+function gauge(v){ if(v==="UNSPECIFIED") return "データなし（UNSPECIFIED）";
+ let s=""; for(let i=0;i<4;i++) s+= i<=v ? "●" : "○"; return s+" ("+v+")"; }
+let HZPRI=false;
+Promise.all([fetch("iwata_succession_500m.geojson").then(r=>r.json()),
+ fetch("profile_iwata.json").then(r=>r.json()).catch(()=>fetch("industry_trust_succession.json").then(r=>r.json()).catch(()=>null))]).then(([fc,prof])=>{
+ FC=fc; if(prof) applyProfile(prof); applyMode(prof); buildFilters(); draw(); summary(); showProfInfo(prof); });
+function dispColor(f){ const p=f.properties;
+ if(p.color==="gray"||p.color==="purple") return p.color;
+ if(HZPRI && p.ranks && p.ranks.hazard_exposure!=="UNSPECIFIED" && p.ranks.hazard_exposure>=2) return "purple";
+ return p.color; }
+function isWatch(f){ const p=f.properties;
+ return !HZPRI && p.color!=="gray" && p.color!=="purple" && p.ranks && p.ranks.hazard_exposure===2; }
+function applyMode(prof){ const b=document.getElementById("modebanner-text"), m=document.getElementById("modebadge");
+ const proto=!prof || prof.is_prototype!==false;
+ if(m) m.textContent=proto?"試作版":"確定版";
+ if(b) b.textContent=proto
+  ? "試作表示: 閾値は仮置き [INFERRED]。正式値はプロファイル確定後に反映。"
+  : ((prof&&prof.public_note)||"確定版");
+ const tgl=document.getElementById("hzpri");
+ const defOff=!prof || !prof.ui || !prof.ui.hazard_toggle || prof.ui.hazard_toggle.default!=="on";
+ if(tgl){ tgl.checked=!defOff; HZPRI=tgl.checked;
+  tgl.addEventListener("change",()=>{HZPRI=tgl.checked;draw();summary();}); } }
+function applyProfile(prof){ try{
+ const l={},ru={}; (prof.quadrants||[]).forEach(q=>{ l[q.color]=q.label; ru[q.color]=q.rule; });
+ ["red","yellow","purple","green","gray"].forEach(k=>{ if(l[k]) LABEL[k]=l[k]; if(ru[k]) RULE[k]=ru[k]; });
+ }catch(e){} }
+function showProfInfo(prof){ const d=document.getElementById("profinfo"); d.textContent="";
+ if(!prof){d.textContent="プロファイル: 内蔵代替表示（取得失敗時） [INFERRED]";return;}
+ const th=(prof.thresholds&&(prof.thresholds.note||""))||"";
+ d.textContent="プロファイル: "+(prof.profile_id||"")+" v"+((prof.meta&&prof.meta.version)||"")+"。"+th; }
+function project(){ const xs=[],ys=[]; FC.features.forEach(f=>f.geometry.coordinates[0].forEach(p=>{xs.push(p[0]);ys.push(p[1]);}));
+ const x0=Math.min(...xs),x1=Math.max(...xs),y0=Math.min(...ys),y1=Math.max(...ys);
+ const latM=(y0+y1)/2*Math.PI/180, kx=Math.cos(latM);
+ const W=700,H=460,M=28;
+ const dx=(x1-x0)*kx||1, dy=(y1-y0)||1, s=Math.min((W-2*M)/dx,(H-2*M)/dy);
+ const ox=M+((W-2*M)-dx*s)/2, oy=M+((H-2*M)-dy*s)/2;
+ return {px:(lon)=>(ox+(lon-x0)*kx*s), py:(lat)=>(H-oy-(lat-y0)*s)}; }
+let PROJ=null;
+function draw(){ const c=document.getElementById("m"),x=c.getContext("2d");
+ x.clearRect(0,0,c.width,c.height); PROJ=project();
+ FC.features.forEach((f,i)=>{ const p=f.geometry.coordinates[0];
+  x.beginPath(); p.forEach((q,j)=>{j?x.lineTo(PROJ.px(q[0]),PROJ.py(q[1])):x.moveTo(PROJ.px(q[0]),PROJ.py(q[1]));}); x.closePath();
+  const dc=dispColor(f), dim=FILTER&&dc!==FILTER, hov=HOVER===i, watch=isWatch(f);
+  x.globalAlpha=dim?0.15:1; x.fillStyle=COL[dc]||"#999"; x.fill();
+  x.globalAlpha=1; x.lineWidth=hov?3:(watch?2.5:1.5); x.strokeStyle=hov?"#0F172A":(watch?"#6D28D9":"#FFFFFF"); x.stroke(); });
+ document.getElementById("info").textContent="マスの数: "+FC.features.length+(FILTER?"（絞り込み: "+LABEL[FILTER]+"、他は薄く表示）":""); }
+function buildFilters(){ const d=document.getElementById("filters"); d.textContent="";
+ ORDER.forEach(k=>{ const b=document.createElement("button"); b.className="qbtn"; b.dataset.k=k;
+  const row=document.createElement("div"); row.className="row";
+  const dot=document.createElement("span"); dot.className="dot"; dot.style.background=COL[k];
+  const name=document.createElement("span"); name.textContent=LABEL[k];
+  row.appendChild(dot); row.appendChild(name); b.appendChild(row);
+  const rule=document.createElement("div"); rule.className="rule"; rule.textContent=RULE[k]||"";
+  b.appendChild(rule);
+  b.addEventListener("click",()=>{FILTER=(FILTER===k?null:k);
+   d.querySelectorAll(".qbtn").forEach(e=>e.classList.toggle("active",e.dataset.k===FILTER)); draw();});
+  d.appendChild(b); }); }
+function summary(){ const t=document.getElementById("summary");
+ while(t.rows.length>1) t.deleteRow(1);
+ const n=FC.features.length, cnt={};
+ FC.features.forEach(f=>{const dc=dispColor(f);cnt[dc]=(cnt[dc]||0)+1;});
+ ORDER.forEach(k=>{ const c=cnt[k]||0, r=n?Math.round(c/n*100):0;
+  const tr=document.createElement("tr");
+  const a=document.createElement("td"); a.textContent=LABEL[k];
+  const b2=document.createElement("td"); b2.textContent=c;
+  const c2=document.createElement("td"); c2.textContent=r+"%";
+  tr.appendChild(a); tr.appendChild(b2); tr.appendChild(c2); t.appendChild(tr); }); }
+function showDetail(i){ const d=document.getElementById("detail"); d.textContent="";
+ if(i==null){d.textContent="地図のマスを選んでください。";return;}
+ const f=FC.features[i], p=f.properties;
+ const h=document.createElement("div");
+ const title=document.createElement("b"); title.textContent="mesh_id: "+p.mesh_id;
+ h.appendChild(title); h.appendChild(document.createTextNode("（"+(LABEL[p.color]||p.color)+"）")); h.appendChild(document.createElement("br"));
+ KEYS.forEach(k=>{ const row=document.createElement("div");
+  row.textContent=JALABEL[k]+" ";
+  const g=document.createElement("span"); g.className="gauge"; g.textContent=gauge(p.ranks[k]);
+  row.appendChild(g); h.appendChild(row); });
+ const act=document.createElement("div"); act.style.marginTop="6px"; act.textContent=ACT[p.color]||"";
+ h.appendChild(act);
+ if(isWatch(FC.features[i])){ const w=document.createElement("div");
+  w.style.marginTop="6px"; w.style.color="#6D28D9";
+  w.textContent="注意: 洪水の想定が中くらい（災害の危なさ rank2）のため、あとつぎの色を優先して表示中です。災害に気をつけるエリアを優先表示に切り替えると紫で確認できます。";
+  h.appendChild(w); }
+ d.appendChild(h); }
+function hit(mx,my){ const c=document.getElementById("m"),r=c.getBoundingClientRect();
+ const sx=c.width/r.width, sy=c.height/r.height, X=mx*sx, Y=my*sy, x=c.getContext("2d");
+ for(let i=FC.features.length-1;i>=0;i--){ const p=FC.features[i].geometry.coordinates[0];
+  x.save(); x.beginPath(); p.forEach((q,j)=>{j?x.lineTo(PROJ.px(q[0]),PROJ.py(q[1])):x.moveTo(PROJ.px(q[0]),PROJ.py(q[1]));}); x.closePath();
+  if(x.isPointInPath(X,Y)){x.restore();return i;} x.restore(); } return null; }
+const cv=document.getElementById("m");
+function clearSel(){HOVER=null;showDetail(null);draw();}
+cv.addEventListener("click",e=>{const r=cv.getBoundingClientRect();const i=hit(e.clientX-r.left,e.clientY-r.top);HOVER=i;showDetail(i);draw();});
+cv.addEventListener("mousemove",e=>{const r=cv.getBoundingClientRect();const i=hit(e.clientX-r.left,e.clientY-r.top);
+ if(i!==HOVER){HOVER=i;if(i!=null)showDetail(i);draw();}});
+cv.addEventListener("mouseleave",()=>{HOVER=null;draw();});
+document.addEventListener("keydown",e=>{if(e.key==="Escape"){FILTER=null;
+ document.querySelectorAll(".qbtn").forEach(x=>x.classList.remove("active"));clearSel();}});
+</script></body></html>
