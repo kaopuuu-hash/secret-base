@@ -49,14 +49,14 @@
 <table class="data"><thead><tr><th>#</th><th>緯度</th><th>経度</th><th>最寄りバス停</th><th>距離</th><th>最寄り店</th><th>距離</th></tr></thead><tbody>
 <tr><td>1</td><td>34.71349</td><td>138.07519</td><td>高田</td><td>550m</td><td>ファミリーマート 菊川上平川店</td><td>601m</td></tr>
 <tr><td>2</td><td>34.77710</td><td>138.09094</td><td>柳町三丁目</td><td>653m</td><td>マツモトキヨシ</td><td>1462m</td></tr>
-<tr><td>3</td><td>34.70172</td><td>138.12203</td><td>川東公民館</td><td>503m</td><td></td><td>2218m</td></tr>
+<tr><td>3</td><td>34.70172</td><td>138.12203</td><td>川東公民館</td><td>503m</td><td>名称なし</td><td>2218m</td></tr>
 <tr><td>4</td><td>34.73144</td><td>138.11446</td><td>神尾上</td><td>521m</td><td>ファミリーマート 菊川東横地店</td><td>1557m</td></tr>
 <tr><td>5</td><td>34.74094</td><td>138.13467</td><td>丸尾原神社</td><td>621m</td><td>ミニストップ 菊川半済店</td><td>3507m</td></tr>
 <tr><td>6</td><td>34.79699</td><td>138.09800</td><td>火剣山入口前</td><td>1031m</td><td>セブン-イレブン</td><td>3180m</td></tr>
 <tr><td>7</td><td>34.68647</td><td>138.11276</td><td>山平下</td><td>571m</td><td>ローソン 菊川高橋店</td><td>1240m</td></tr>
 <tr><td>8</td><td>34.76946</td><td>138.08230</td><td>堀之内公会堂</td><td>529m</td><td>マツモトキヨシ</td><td>715m</td></tr>
 <tr><td>9</td><td>34.78439</td><td>138.13060</td><td>下倉沢公会堂入口</td><td>516m</td><td>セブンイレブン 菊川倉沢店</td><td>923m</td></tr>
-<tr><td>10</td><td>34.69470</td><td>138.10822</td><td>虚空蔵</td><td>882m</td><td></td><td>776m</td></tr>
+<tr><td>10</td><td>34.69470</td><td>138.10822</td><td>虚空蔵</td><td>882m</td><td>名称なし</td><td>776m</td></tr>
 <tr><td>11</td><td>34.71591</td><td>138.12800</td><td>丹野公民館</td><td>658m</td><td>ファミリーマート 菊川東横地店</td><td>3187m</td></tr>
 <tr><td>12</td><td>34.74713</td><td>138.07132</td><td>白岩下</td><td>548m</td><td>スーパーラック菊川店</td><td>826m</td></tr>
 </tbody></table>
@@ -85,8 +85,8 @@ function freqColor(w){ if(w<=5) return '#C0392B'; if(w<=9) return '#E67E22'; ret
 var gBus=L.layerGroup(), gGtfs=L.layerGroup(), gShop=L.layerGroup(), gGap=L.layerGroup();
 bus.forEach(function(p){ L.circleMarker([p.la,p.lo],{radius:3,color:'#1a5fb4',fillColor:'#1a5fb4',fillOpacity:.8,weight:1}).bindPopup('<b>'+p.n+'</b><br>'+p.o+'<br>'+p.s).addTo(gBus); });
 gtfs.forEach(function(p){ var c=freqColor(p.w); L.circleMarker([p.la,p.lo],{radius:4,color:c,fillColor:c,fillOpacity:.85,weight:1}).bindPopup('<b>'+p.n+'</b><br>平日'+p.w+'本（'+p.wf+'〜'+p.wl+'）<br>休日'+p.h+'本').addTo(gGtfs); });
-shops.forEach(function(p){ var l=p.k==='supermarket'?'スーパー':(p.k==='convenience'?'コンビニ':'薬局'); L.circleMarker([p.la,p.lo],{radius:4,color:'#8D5A2B',fillColor:'#F5C16C',fillOpacity:.9,weight:1}).bindPopup('<b>'+p.n+'</b><br>'+l).addTo(gShop); });
-gap.forEach(function(p,i){ L.marker([p.lat,p.lon],{icon:L.divIcon({className:'gap-star', html:'<div class="star">★<span>'+(i+1)+'</span></div>', iconSize:[36,36], iconAnchor:[18,18]})}).bindPopup('#'+(i+1)+' バス'+p.bus_m+'m（'+p.bus+'）<br>店'+p.shop_m+'m（'+p.shop+'）').addTo(gGap); });
+shops.forEach(function(p){ var l=p.k==='supermarket'?'スーパー':(p.k==='convenience'?'コンビニ':'薬局'); L.circleMarker([p.la,p.lo],{radius:4,color:'#8D5A2B',fillColor:'#F5C16C',fillOpacity:.9,weight:1}).bindPopup('<b>'+(p.n||'名称なし')+'</b><br>'+l).addTo(gShop); });
+gap.forEach(function(p,i){ L.marker([p.lat,p.lon],{icon:L.divIcon({className:'gap-star', html:'<div class="star">★<span>'+(i+1)+'</span></div>', iconSize:[36,36], iconAnchor:[18,18]})}).bindPopup('#'+(i+1)+' バス'+p.bus_m+'m（'+p.bus+'）<br>店'+p.shop_m+'m（'+(p.shop||'名称なし')+'）').addTo(gGap); });
 gBus.addTo(map); gGtfs.addTo(map); gShop.addTo(map); gGap.addTo(map);
 function tog(id,layer){ var b=document.getElementById(id); b.onclick=function(){ if(map.hasLayer(layer)){map.removeLayer(layer);b.classList.remove('on');} else {map.addLayer(layer);b.classList.add('on');} }; }
 tog('bBus',gBus); tog('bGtfs',gGtfs); tog('bShop',gShop); tog('bGap',gGap);
